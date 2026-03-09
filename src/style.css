@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
 
 @theme {
   --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
@@ -59,4 +59,59 @@ body {
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-gray-200 rounded-full;
+}
+
+/* Infinite Slider Animations */
+@layer utilities {
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(calc(-300px * 10 - 1.5rem * 10));
+    }
+  }
+
+  .animate-infinite-scroll {
+    display: flex;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+
+  .animate-infinite-scroll:hover {
+    animation-play-state: paused;
+  }
+
+  .service-card {
+    @apply relative w-[300px] h-[450px] rounded-[2rem] overflow-hidden flex-shrink-0 transition-all duration-500 cursor-pointer;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .service-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity duration-500;
+  }
+
+  .service-card:hover {
+    @apply -translate-y-4 shadow-2xl;
+  }
+
+  .service-card:hover::before {
+    @apply opacity-80;
+  }
+
+  .service-card-content {
+    @apply absolute bottom-0 left-0 p-8 text-white w-full transition-transform duration-500;
+  }
+
+  .service-card:hover .service-card-content {
+    @apply -translate-y-2;
+  }
+
+  .slider-container {
+    @apply relative overflow-hidden py-12;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
 }

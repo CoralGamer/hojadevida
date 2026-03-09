@@ -9,770 +9,946 @@
 </head>
 
 <body class="bg-[#F8F9FA] text-[#1F1F1F]">
-  <div id="app" class="max-w-6xl mx-auto px-4 py-8 md:py-16">
+  <div id="app" class="w-full py-8 md:py-16 overflow-x-hidden">
+    <div class="max-w-6xl mx-auto px-4">
 
-    <!-- Header / Profile Section -->
-    <header
-      class="flex flex-col md:flex-row items-center gap-8 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <div class="relative group">
-        <div
-          class="absolute -inset-1 bg-gradient-to-r from-[#1A73E8] via-[#EA4335] to-[#FBBC04] rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
-        </div>
-        <img src="src/assets/images/IMG_01111.jpg" alt="Jeefry Nicolas Archila" width="224" height="224"
-          class="relative w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-white shadow-xl">
-      </div>
-      <div class="text-center md:text-left">
-        <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-          Jeefry Nicolas <span class="text-[#1A73E8]">Archila Romero</span>
-        </h1>
-        <p
-          class="text-xl md:text-2xl text-gray-600 font-light mb-6 flex flex-wrap justify-center md:justify-start gap-2">
-          <span>🎮 Desarrollador de videojuegos,</span>
-          <span>creativo digital y</span>
-          <span>líder de proyectos multimedia</span>
-        </p>
-        <div class="flex flex-wrap justify-center md:justify-start gap-3 text-sm font-medium">
-          <span class="px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100 flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#1A73E8]"></span> Bogota, Colombia
-          </span>
-          <span class="px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100 flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#34A853]"></span> 30 de julio, 2002
-          </span>
-          <a href="https://www.linkedin.com/in/jeefry-archila-tech/" target="_blank"
-            class="px-4 py-2 bg-[#0A66C2] text-white rounded-full shadow-md flex items-center gap-2 hover:bg-[#004182] transition-colors">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-              <path
-                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-            </svg>
-            LinkedIn
-          </a>
-        </div>
-      </div>
-    </header>
-
-    <!-- Bento Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-
-      <!-- About Me -->
-      <section class="md:col-span-8 bento-card flex flex-col justify-center">
-        <h2 class="text-2xl font-semibold mb-4 flex items-center gap-2">
-          <span class="google-blue">📍</span> Quién soy
-        </h2>
-        <p class="text-gray-600 leading-relaxed text-lg italic">
-          "Apasionado por las tecnologías y la educación digital, con una visión creativa y profesional. Me caracterizo
-          por mis ideas resolutivas, liderazgo y manejo de equipos y proyectos de forma empírica e implacable. Amante de
-          la realidad virtual y las experiencias inmersivas; creador experto en el desarrollo de videojuegos y
-          contenidos digitales, orientado a compartir conocimiento y transformar ideas en proyectos reales."
-        </p>
-      </section>
-
-      <!-- Profile Details -->
-      <section
-        class="md:col-span-4 bento-card bg-gradient-to-br from-[#1A73E8] to-[#174ea6] text-white border-none shadow-lg">
-        <h2 class="text-xl font-semibold mb-6">Canales Digitales</h2>
-        <div class="space-y-4">
-          <button id="revealEmail1"
-            class="w-full flex items-center gap-3 p-3 bg-white/10 rounded-2xl hover:bg-white/20 transition-colors group">
-            <svg class="w-5 h-5 opacity-80" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-            </svg>
-            <span class="text-xs truncate font-medium">Ver Correo Personal</span>
-          </button>
-          <button id="revealEmail2"
-            class="w-full flex items-center gap-3 p-3 bg-white/10 rounded-2xl hover:bg-white/20 transition-colors group">
-            <svg class="w-5 h-5 opacity-80" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-            </svg>
-            <span class="text-xs truncate font-medium">Ver Correo Educativo</span>
-          </button>
-          <div class="pt-4 border-t border-blue-400/30">
-            <p class="text-[10px] uppercase tracking-[0.2em] text-blue-200 mb-3 ml-1">Idiomas</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1.5 bg-white/10 rounded-xl text-xs font-semibold backdrop-blur-sm">Español:
-                Nativo</span>
-              <span class="px-3 py-1.5 bg-white/10 rounded-xl text-xs font-semibold backdrop-blur-sm">Inglés:
-                A2-B1</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Featured Experience -->
-      <section class="md:col-span-12 lg:col-span-7 bento-card border-l-4 border-l-[#EA4335]">
-        <h2 class="text-2xl font-semibold mb-8 flex items-center gap-2">
-          <span class="google-red">🚀</span> Proyectos & Liderazgo
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="p-5 bg-[#FFF4F3] rounded-[1.5rem] border border-[#FFDADA] hover:shadow-md transition-shadow">
-            <h3 class="font-bold text-lg text-[#B21F11]">Trucking Empire</h3>
-            <p class="text-xs font-medium text-gray-500 mb-4 tracking-wide">Main Dev & Community Manager</p>
-            <a href="https://www.roblox.com/games/7345818711/PROMOCODE-MORE-Trucking-Empire" target="_blank"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-white text-[#EA4335] rounded-full text-xs font-bold border border-[#FFDADA] hover:bg-[#EA4335] hover:text-white transition-all">
-              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 12l10 10 10-10L12 2zm0 4.5l5.5 5.5-5.5 5.5L6.5 12 12 6.5z" />
-              </svg>
-              ABRIR EN ROBLOX
-            </a>
-          </div>
-          <div class="p-5 bg-white rounded-[1.5rem] border border-gray-100 hover:shadow-md transition-shadow">
-            <h3 class="font-bold text-lg text-gray-800">Mud Master</h3>
-            <p class="text-xs font-medium text-gray-500 mb-4 tracking-wide">CEO y Fundador</p>
-            <a href="https://www.roblox.com/communities/6817759/MUDWHEELS-Game-Studios#!/about" target="_blank"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-800 rounded-full text-xs font-bold border border-gray-200 hover:bg-black hover:text-white transition-all">
-              MUDWHEELS STUDIOS
-            </a>
-          </div>
-          <div class="p-5 bg-white rounded-[1.5rem] border border-gray-100 hover:shadow-md transition-shadow">
-            <h3 class="font-bold text-lg text-gray-800">Bumpo</h3>
-            <p class="text-xs font-medium text-gray-500 mb-4 tracking-wide">CEO y Fundador</p>
-            <a href="https://www.bumpo.com.co" target="_blank"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-[#1A73E8] text-white rounded-full text-xs font-bold shadow-sm hover:shadow-lg transition-all">
-              VISITAR SITIO WEB
-            </a>
-          </div>
+      <!-- Header / Profile Section -->
+      <header
+        class="flex flex-col md:flex-row items-center gap-8 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+        <div class="relative group">
           <div
-            class="p-5 bg-gray-50 rounded-[1.5rem] border border-dashed border-gray-300 flex items-center justify-center">
-            <p class="text-xs text-gray-400 font-medium text-center">Desarrollador independiente de videojuegos y sitios
-              web</p>
+            class="absolute -inset-1 bg-gradient-to-r from-[#1A73E8] via-[#EA4335] to-[#FBBC04] rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
           </div>
+          <img src="src/assets/images/IMG_01111.jpg" alt="Jeefry Nicolas Archila" width="224" height="224"
+            class="relative w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-white shadow-xl">
         </div>
-      </section>
-
-      <!-- General Experience -->
-      <section class="md:col-span-12 lg:col-span-5 bento-card overflow-hidden">
-        <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
-          <span class="google-yellow">📅</span> Trayectoria Profesional
-        </h2>
-        <div
-          class="space-y-3 relative before:absolute before:left-[1.25rem] before:top-2 before:bottom-2 before:w-[2px] before:bg-gray-100">
-          <!-- Newest to Oldest -->
-          <div class="relative pl-9 group">
-            <div
-              class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-[#FBBC04] ring-4 ring-white transition-transform group-hover:scale-125">
-            </div>
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2023 - Actualidad</p>
-            <p class="text-sm font-bold text-gray-700">Líder de aprendices – SENA</p>
-          </div>
-          <div class="relative pl-9 group">
-            <div
-              class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
-            </div>
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2022</p>
-            <p class="text-sm font-bold text-gray-700">Cangurero en peaje – El Charquito</p>
-          </div>
-          <div class="relative pl-9 group">
-            <div
-              class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
-            </div>
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2022</p>
-            <p class="text-sm font-bold text-gray-700">Guardia de Vigilancia – MGS Total SAS</p>
-          </div>
-          <div class="relative pl-9 group">
-            <div
-              class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
-            </div>
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2020 - 2021</p>
-            <p class="text-sm font-bold text-gray-700">Vendedor puerta a puerta</p>
-          </div>
-        </div>
-        <button id="viewMoreEx"
-          class="w-full mt-6 py-2 text-xs font-bold text-[#1A73E8] border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors uppercase tracking-widest">
-          Ver trayectoria completa
-        </button>
-        <!-- Hidden Additional History -->
-        <div id="extraExp" class="hidden mt-4 space-y-3 pt-4 border-t border-gray-50 transition-all duration-500">
-          <div class="relative pl-9">
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2019-2020</p>
-            <p class="text-sm font-bold text-gray-700">Comercial – Textiles Gaviota</p>
-          </div>
-          <div class="relative pl-9">
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2019</p>
-            <p class="text-sm font-bold text-gray-700">Profesor sustituto – María Reina</p>
-          </div>
-          <div class="relative pl-9">
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Actividad Actual</p>
-            <p class="text-sm font-bold text-gray-700 uppercase">Productor apícola – OROMIEL</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Education & Certs -->
-      <section class="md:col-span-12 bento-card bg-[#F1F3F4] border-none">
-        <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
-          <span class="google-green">🎓</span> Formación & Certificaciones
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div class="bg-white p-5 rounded-3xl group hover:shadow-md transition-all">
-            <div
-              class="w-8 h-8 rounded-lg bg-[#34A853]/10 flex items-center justify-center text-[#34A853] mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+        <div class="text-center md:text-left">
+          <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+            Jeefry Nicolas <span class="text-[#1A73E8]">Archila Romero</span>
+          </h1>
+          <p
+            class="text-xl md:text-2xl text-gray-600 font-light mb-6 flex flex-wrap justify-center md:justify-start gap-2">
+            <span>🎮 Desarrollador de videojuegos,</span>
+            <span>creativo digital y</span>
+            <span>líder de proyectos multimedia</span>
+          </p>
+          <div class="flex flex-wrap justify-center md:justify-start gap-3 text-sm font-medium">
+            <span class="px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#1A73E8]"></span> Bogota, Colombia
+            </span>
+            <span class="px-4 py-2 bg-white rounded-full shadow-sm border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#34A853]"></span> 30 de julio, 2002
+            </span>
+            <a href="https://www.linkedin.com/in/jeefry-archila-tech/" target="_blank"
+              class="px-4 py-2 bg-[#0A66C2] text-white rounded-full shadow-md flex items-center gap-2 hover:bg-[#004182] transition-colors">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path
-                  d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm0 0V20" />
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
               </svg>
-            </div>
-            <p class="font-bold text-sm text-gray-800">Tecnólogo en Producción Multimedia</p>
-            <p class="text-xs text-gray-500 mt-1">SENA (Actualmente)</p>
+              LinkedIn
+            </a>
           </div>
-          <div class="bg-white p-5 rounded-3xl group hover:shadow-md transition-all">
+        </div>
+      </header>
+
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+        <!-- About Me -->
+        <section class="md:col-span-8 bento-card flex flex-col justify-center">
+          <h2 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+            <span class="google-blue">📍</span> Quién soy
+          </h2>
+          <p class="text-gray-600 leading-relaxed text-lg italic">
+            "Apasionado por las tecnologías y la educación digital, con una visión creativa y profesional. Me
+            caracterizo
+            por mis ideas resolutivas, liderazgo y manejo de equipos y proyectos de forma empírica e implacable. Amante
+            de
+            la realidad virtual y las experiencias inmersivas; creador experto en el desarrollo de videojuegos y
+            contenidos digitales, orientado a compartir conocimiento y transformar ideas en proyectos reales."
+          </p>
+        </section>
+
+        <!-- Profile Details -->
+        <section
+          class="md:col-span-4 bento-card bg-gradient-to-br from-[#1A73E8] to-[#174ea6] text-white border-none shadow-lg">
+          <h2 class="text-xl font-semibold mb-6">Canales Digitales</h2>
+          <div class="space-y-4">
+            <button id="revealEmail1"
+              class="w-full flex items-center gap-3 p-3 bg-white/10 rounded-2xl hover:bg-white/20 transition-colors group">
+              <svg class="w-5 h-5 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+              <span class="text-xs truncate font-medium">Ver Correo Personal</span>
+            </button>
+            <button id="revealEmail2"
+              class="w-full flex items-center gap-3 p-3 bg-white/10 rounded-2xl hover:bg-white/20 transition-colors group">
+              <svg class="w-5 h-5 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+              <span class="text-xs truncate font-medium">Ver Correo Educativo</span>
+            </button>
+            <div class="pt-4 border-t border-blue-400/30">
+              <p class="text-[10px] uppercase tracking-[0.2em] text-blue-200 mb-3 ml-1">Idiomas</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1.5 bg-white/10 rounded-xl text-xs font-semibold backdrop-blur-sm">Español:
+                  Nativo</span>
+                <span class="px-3 py-1.5 bg-white/10 rounded-xl text-xs font-semibold backdrop-blur-sm">Inglés:
+                  A2-B1</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Featured Experience -->
+        <section class="md:col-span-12 lg:col-span-7 bento-card border-l-4 border-l-[#EA4335]">
+          <h2 class="text-2xl font-semibold mb-8 flex items-center gap-2">
+            <span class="google-red">🚀</span> Proyectos & Liderazgo
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-5 bg-[#FFF4F3] rounded-[1.5rem] border border-[#FFDADA] hover:shadow-md transition-shadow">
+              <h3 class="font-bold text-lg text-[#B21F11]">Trucking Empire</h3>
+              <p class="text-xs font-medium text-gray-500 mb-4 tracking-wide">Main Dev & Community Manager</p>
+              <a href="https://www.roblox.com/games/7345818711/PROMOCODE-MORE-Trucking-Empire" target="_blank"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-white text-[#EA4335] rounded-full text-xs font-bold border border-[#FFDADA] hover:bg-[#EA4335] hover:text-white transition-all">
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2L2 12l10 10 10-10L12 2zm0 4.5l5.5 5.5-5.5 5.5L6.5 12 12 6.5z" />
+                </svg>
+                ABRIR EN ROBLOX
+              </a>
+            </div>
+            <div class="p-5 bg-white rounded-[1.5rem] border border-gray-100 hover:shadow-md transition-shadow">
+              <h3 class="font-bold text-lg text-gray-800">Mud Master</h3>
+              <p class="text-xs font-medium text-gray-500 mb-4 tracking-wide">CEO y Fundador</p>
+              <a href="https://www.roblox.com/communities/6817759/MUDWHEELS-Game-Studios#!/about" target="_blank"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-800 rounded-full text-xs font-bold border border-gray-200 hover:bg-black hover:text-white transition-all">
+                MUDWHEELS STUDIOS
+              </a>
+            </div>
+            <div class="p-5 bg-white rounded-[1.5rem] border border-gray-100 hover:shadow-md transition-shadow">
+              <h3 class="font-bold text-lg text-gray-800">Bumpo</h3>
+              <p class="text-xs font-medium text-gray-500 mb-4 tracking-wide">CEO y Fundador</p>
+              <a href="https://www.bumpo.com.co" target="_blank"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-[#1A73E8] text-white rounded-full text-xs font-bold shadow-sm hover:shadow-lg transition-all">
+                VISITAR SITIO WEB
+              </a>
+            </div>
             <div
-              class="w-8 h-8 rounded-lg bg-[#34A853]/10 flex items-center justify-center text-[#34A853] mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              class="p-5 bg-gray-50 rounded-[1.5rem] border border-dashed border-gray-300 flex items-center justify-center">
+              <p class="text-xs text-gray-400 font-medium text-center">Desarrollador independiente de videojuegos y
+                sitios
+                web</p>
             </div>
-            <p class="font-bold text-sm text-gray-800">Desarrollo Web con JS y Node.js</p>
-            <p class="text-xs text-gray-500 mt-1">SENA (2024)</p>
           </div>
-          <div class="bg-white p-5 rounded-3xl group hover:shadow-md transition-all">
-            <div
-              class="w-8 h-8 rounded-lg bg-[#34A853]/10 flex items-center justify-center text-[#34A853] mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
+        </section>
+
+        <!-- General Experience -->
+        <section class="md:col-span-12 lg:col-span-5 bento-card overflow-hidden">
+          <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+            <span class="google-yellow">📅</span> Trayectoria Profesional
+          </h2>
+          <div
+            class="space-y-3 relative before:absolute before:left-[1.25rem] before:top-2 before:bottom-2 before:w-[2px] before:bg-gray-100">
+            <!-- Newest to Oldest -->
+            <div class="relative pl-9 group">
+              <div
+                class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-[#FBBC04] ring-4 ring-white transition-transform group-hover:scale-125">
+              </div>
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2023 - Actualidad</p>
+              <p class="text-sm font-bold text-gray-700">Líder de aprendices – SENA</p>
             </div>
-            <p class="font-bold text-sm text-gray-800">Seguridad Informática</p>
-            <p class="text-xs text-gray-500 mt-1">SENA (2019)</p>
+            <div class="relative pl-9 group">
+              <div
+                class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
+              </div>
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2022</p>
+              <p class="text-sm font-bold text-gray-700">Cangurero en peaje – El Charquito</p>
+            </div>
+            <div class="relative pl-9 group">
+              <div
+                class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
+              </div>
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2022</p>
+              <p class="text-sm font-bold text-gray-700">Guardia de Vigilancia – MGS Total SAS</p>
+            </div>
+            <div class="relative pl-9 group">
+              <div
+                class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
+              </div>
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2020 - 2021</p>
+              <p class="text-sm font-bold text-gray-700">Vendedor puerta a puerta</p>
+            </div>
           </div>
-          <!-- More Certs -->
-          <div class="col-span-1 sm:col-span-full mt-4">
-            <p class="text-[10px] font-bold text-gray-400 uppercase mb-3 ml-2 tracking-[0.3em]">Otras Certificaciones
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span
-                class="px-4 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 italic">Desarrollo
-                Web PHP (2019)</span>
-              <span
-                class="px-4 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 italic">Técnico
-                RRHH (2018)</span>
-              <span
-                class="px-4 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 italic">Adm.
-                Recursos Humanos (2018)</span>
-              <span
-                class="px-4 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 italic">Bachiller
-                - María Reina (2018)</span>
+          <button id="viewMoreEx"
+            class="w-full mt-6 py-2 text-xs font-bold text-[#1A73E8] border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors uppercase tracking-widest">
+            Ver trayectoria completa
+          </button>
+          <!-- Hidden Additional History -->
+          <div id="extraExp" class="hidden mt-4 space-y-3 pt-4 border-t border-gray-50 transition-all duration-500">
+            <div class="relative pl-9">
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2019-2020</p>
+              <p class="text-sm font-bold text-gray-700">Comercial – Textiles Gaviota</p>
+            </div>
+            <div class="relative pl-9">
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2019</p>
+              <p class="text-sm font-bold text-gray-700">Profesor sustituto – María Reina</p>
+            </div>
+            <div class="relative pl-9">
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Actividad Actual</p>
+              <p class="text-sm font-bold text-gray-700 uppercase">Productor apícola – OROMIEL</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education & Certs -->
+        <section class="md:col-span-12 bento-card bg-[#F1F3F4] border-none">
+          <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+            <span class="google-green">🎓</span> Formación & Certificaciones
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-white p-5 rounded-3xl group hover:shadow-md transition-all">
+              <div
+                class="w-8 h-8 rounded-lg bg-[#34A853]/10 flex items-center justify-center text-[#34A853] mb-4 group-hover:scale-110 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm0 0V20" />
+                </svg>
+              </div>
+              <p class="font-bold text-sm text-gray-800">Tecnólogo en Producción Multimedia</p>
+              <p class="text-xs text-gray-500 mt-1">SENA (Actualmente)</p>
+            </div>
+            <div class="bg-white p-5 rounded-3xl group hover:shadow-md transition-all">
+              <div
+                class="w-8 h-8 rounded-lg bg-[#34A853]/10 flex items-center justify-center text-[#34A853] mb-4 group-hover:scale-110 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p class="font-bold text-sm text-gray-800">Desarrollo Web con JS y Node.js</p>
+              <p class="text-xs text-gray-500 mt-1">SENA (2024)</p>
+            </div>
+            <div class="bg-white p-5 rounded-3xl group hover:shadow-md transition-all">
+              <div
+                class="w-8 h-8 rounded-lg bg-[#34A853]/10 flex items-center justify-center text-[#34A853] mb-4 group-hover:scale-110 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <p class="font-bold text-sm text-gray-800">Seguridad Informática</p>
+              <p class="text-xs text-gray-500 mt-1">SENA (2019)</p>
+            </div>
+            <!-- More Certs -->
+            <div class="col-span-1 sm:col-span-full mt-4">
+              <p class="text-[10px] font-bold text-gray-400 uppercase mb-3 ml-2 tracking-[0.3em]">Otras Certificaciones
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-4 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 italic">Desarrollo
+                  Web PHP (2019)</span>
+                <span
+                  class="px-4 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 italic">Técnico
+                  RRHH (2018)</span>
+                <span
+                  class="px-4 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 italic">Adm.
+                  Recursos Humanos (2018)</span>
+                <span
+                  class="px-4 py-2 bg-white rounded-full text-[10px] font-bold text-gray-600 border border-gray-100 italic">Bachiller
+                  - María Reina (2018)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills Cloud -->
+        <section class="md:col-span-12 bento-card">
+          <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+            <span class="google-blue">🛠</span> Skills & Tech Stack
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <p class="text-[10px] font-bold text-gray-400 uppercase mb-4 tracking-widest">Web & Software</p>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <span class="skill-pill">React</span> <span class="skill-pill">Node.js</span> <span
+                  class="skill-pill">PHP</span> <span class="skill-pill">JavaScript</span>
+                <span class="skill-pill">C#</span> <span class="skill-pill">Lua</span> <span
+                  class="skill-pill">SQL</span>
+                <span class="skill-pill">Vite</span>
+                <span class="skill-pill">Tailwind</span> <span class="skill-pill">Bootstrap</span> <span
+                  class="skill-pill">Git</span> <span class="skill-pill">XAMPP</span>
+                <span class="skill-pill">FileZilla</span> <span class="skill-pill">VS Code</span> <span
+                  class="skill-pill">Warp</span>
+              </div>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold text-gray-400 uppercase mb-4 tracking-widest">Diseño & 3D</p>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <span class="skill-pill-3d">Unity</span> <span class="skill-pill-3d">Unreal Engine</span> <span
+                  class="skill-pill-3d">Blender</span> <span class="skill-pill-3d">Roblox Studio</span>
+                <span class="skill-pill-3d">Substance 3D</span> <span class="skill-pill-3d">Zmodeler</span> <span
+                  class="skill-pill-3d">3DMAX</span> <span class="skill-pill-3d">Maya</span>
+                <span class="skill-pill-3d">After Effects</span> <span class="skill-pill-3d">Photoshop</span> <span
+                  class="skill-pill-3d">Illustrator</span> <span class="skill-pill-3d">Premiere</span> <span
+                  class="skill-pill-3d">Figma</span>
+              </div>
+            </div>
+            <div class="md:col-span-2">
+              <p class="text-[10px] font-bold text-gray-400 uppercase mb-4 tracking-widest">Potenciadores de IA</p>
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3">
+
+                <!-- Antigravity Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/antigravity-color.svg" title="Antigravity" alt="Antigravity"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Antigravity</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-blue-600 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Gemini Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/gemini-color.svg" title="Gemini" alt="Gemini"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Gemini</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-[#1A73E8] w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Claude Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/claude-color.svg" title="Claude" alt="Claude"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Claude</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-[#D97757] w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- OpenAI Card -->
+                <div data-lvl="95"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/openai.svg" title="OpenAI" alt="OpenAI"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">OpenAI</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-[#74AA9C] w-0 group-hover: group-[.is-active]:w-[95%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Kimi AI Card -->
+                <div data-lvl="80"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/kimi-ai-icon.svg" title="Kimi AI" alt="Kimi AI"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Kimi
+                      AI</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-[#10B981] w-0 group-hover: group-[.is-active]:w-[80%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Copilot Card -->
+                <div data-lvl="80"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/copilot-color.svg" title="Copilot" alt="Copilot"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Copilot</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-[#3B82F6] w-0 group-hover: group-[.is-active]:w-[80%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- n8n Card -->
+                <div data-lvl="50"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/n8n-icon.svg" title="n8n" alt="n8n"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">n8n</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-[#FF6D5A] w-0 group-hover: group-[.is-active]:w-[50%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Hugging Face Card -->
+                <div data-lvl="25"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/Hugging-Face-Icon--Streamline-Svg-Logos.svg" title="Hugging Face"
+                      alt="Hugging Face"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Hugging
+                      Face</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-[#FFD21E] w-0 group-hover: group-[.is-active]:w-[25%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="md:col-span-2">
+              <p class="text-[10px] font-bold text-gray-400 uppercase mb-4 tracking-widest">Gestión</p>
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3">
+
+                <!-- Trello Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/trello-logo-icon.svg" title="Trello" alt="Trello"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Trello</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <!-- Expanding Progress Bar -->
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-blue-500 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Notion Card -->
+                <div data-lvl="90"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/notion-icon.svg" title="Notion" alt="Notion"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Notion</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-black w-0 group-hover: group-[.is-active]:w-[90%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Millanote Card -->
+                <div data-lvl="80"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/Milanote--Streamline-Simple-Icons.svg" title="Millanote" alt="Millanote"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Millanote</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-black w-0 group-hover: group-[.is-active]:w-[80%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Office 365 Card -->
+                <div data-lvl="90"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/office-365-icon.svg" title="Office 365" alt="Office 365"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Office
+                      365</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-orange-500 w-0 group-hover: group-[.is-active]:w-[90%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Google Calendar Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/google-calendar-icon.svg" title="Google Calendar" alt="Google Calendar"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Google
+                      Calendar</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-green-600 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Google Chat Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/google-chat-icon.svg" title="Google Chat" alt="Google Chat"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Google
+                      Chat</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-green-600 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Gmail Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/gmail-icon.svg" title="Google Gmail" alt="Google Gmail"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Gmail</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-red-500 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Google Classroom Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/google-classroom-icon.svg" title="Google Classroom"
+                      alt="Google Classroom"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Classroom</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-yellow-600 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Google Drive/Meet Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/google-drive-color-icon.svg" title="Google Drive" alt="Google Drive"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Drive</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-yellow-500 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Google Docs Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/google-docs-icon.svg" title="Google Docs" alt="Google Docs"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Docs</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-blue-400 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+                <!-- Google Task Card -->
+                <div data-lvl="100"
+                  class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
+                    <img src="src/assets/icons/Google_Tasks_2021.svg" title="Google Tasks" alt="Google Tasks"
+                      class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
+                  </div>
+                  <div class="relative h-4 w-full flex justify-center items-center">
+                    <span
+                      class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Tasks</span>
+                    <span
+                      class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
+                  </div>
+                  <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
+                    <div
+                      class="absolute top-0 left-0 h-full bg-blue-400 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
+                    </div>
+                    <span
+                      class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+      </div>
+      <!-- Infinite Services Slider Section -->
+      <section class="mt-24 mb-16">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div class="max-w-2xl">
+              <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+                Servicios <span class="text-[#1A73E8]">Profesionales</span>
+              </h2>
+              <p class="text-xl text-gray-500 font-light">
+                Soluciones digitales de alto impacto, desde desarrollo de videojuegos hasta automatización con IA.
+              </p>
+            </div>
+            <div class="mt-8 md:mt-0">
+              <a href="#"
+                class="inline-flex items-center gap-3 px-8 py-4 bg-black text-white rounded-full font-bold hover:bg-[#1A73E8] transition-all shadow-lg hover:shadow-blue-200 group">
+                Explorar Catálogo
+                <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-container w-screen relative left-1/2 -translate-x-1/2">
+          <div class="animate-infinite-scroll gap-6">
+            <!-- First set of cards -->
+            <div class="service-card" style="background-image: url('src/assets/images/services/game_dev_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Game Development</h3>
+                <p class="text-sm text-gray-200 opacity-80">Creación de mundos inmersivos en Unreal Engine y Unity.</p>
+              </div>
+            </div>
+            <div class="service-card" style="background-image: url('src/assets/images/services/web_dev_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Web Fullstack</h3>
+                <p class="text-sm text-gray-200 opacity-80">Sitios optimizados con React, Vite y Node.js.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('src/assets/images/services/vr_experience_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">VR Experiences</h3>
+                <p class="text-sm text-gray-200 opacity-80">Realidad virtual de vanguardia para cualquier sector.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('src/assets/images/services/roblox_dev_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Roblox Studios</h3>
+                <p class="text-sm text-gray-200 opacity-80">Desarrollo líder en la plataforma Roblox (LUA).</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('src/assets/images/services/3d_modeling_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Modelado 3D</h3>
+                <p class="text-sm text-gray-200 opacity-80">Diseño de activos y personajes de alta fidelidad.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('src/assets/images/services/ai_automation_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">IA & Automation</h3>
+                <p class="text-sm text-gray-200 opacity-80">Implementación de flujos con n8n y modelos LLM.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Post-Producción</h3>
+                <p class="text-sm text-gray-200 opacity-80">Edición de video y efectos visuales cinemáticos.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('https://images.unsplash.com/photo-1454165833762-02651d548e36?auto=format&fit=crop&w=400&q=80')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Project Management</h3>
+                <p class="text-sm text-gray-200 opacity-80">Gestión ágil para proyectos multimedia complejos.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb28f74b671?auto=format&fit=crop&w=400&q=80')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Educación Digital</h3>
+                <p class="text-sm text-gray-200 opacity-80">Capacitación y mentoría en nuevas tecnologías.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Soporte Técnico</h3>
+                <p class="text-sm text-gray-200 opacity-80">Mantenimiento y optimización de sistemas.</p>
+              </div>
+            </div>
+
+            <!-- Repeated set for infinite loop (using the same content) -->
+            <div class="service-card" style="background-image: url('src/assets/images/services/game_dev_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Game Development</h3>
+                <p class="text-sm text-gray-200 opacity-80">Creación de mundos inmersivos en Unreal Engine y Unity.</p>
+              </div>
+            </div>
+            <div class="service-card" style="background-image: url('src/assets/images/services/web_dev_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Web Fullstack</h3>
+                <p class="text-sm text-gray-200 opacity-80">Sitios optimizados con React, Vite y Node.js.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('src/assets/images/services/vr_experience_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">VR Experiences</h3>
+                <p class="text-sm text-gray-200 opacity-80">Realidad virtual de vanguardia para cualquier sector.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('src/assets/images/services/roblox_dev_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Roblox Studios</h3>
+                <p class="text-sm text-gray-200 opacity-80">Desarrollo líder en la plataforma Roblox (LUA).</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('src/assets/images/services/3d_modeling_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Modelado 3D</h3>
+                <p class="text-sm text-gray-200 opacity-80">Diseño de activos y personajes de alta fidelidad.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('src/assets/images/services/ai_automation_service.png')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">IA & Automation</h3>
+                <p class="text-sm text-gray-200 opacity-80">Implementación de flujos con n8n y modelos LLM.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Post-Producción</h3>
+                <p class="text-sm text-gray-200 opacity-80">Edición de video y efectos visuales cinemáticos.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('https://images.unsplash.com/photo-1454165833762-02651d548e36?auto=format&fit=crop&w=400&q=80')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Project Management</h3>
+                <p class="text-sm text-gray-200 opacity-80">Gestión ágil para proyectos multimedia complejos.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb28f74b671?auto=format&fit=crop&w=400&q=80')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Educación Digital</h3>
+                <p class="text-sm text-gray-200 opacity-80">Capacitación y mentoría en nuevas tecnologías.</p>
+              </div>
+            </div>
+            <div class="service-card"
+              style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80')">
+              <div class="service-card-content">
+                <h3 class="text-2xl font-bold mb-2">Soporte Técnico</h3>
+                <p class="text-sm text-gray-200 opacity-80">Mantenimiento y optimización de sistemas.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Skills Cloud -->
-      <section class="md:col-span-12 bento-card">
-        <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
-          <span class="google-blue">🛠</span> Skills & Tech Stack
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <p class="text-[10px] font-bold text-gray-400 uppercase mb-4 tracking-widest">Web & Software</p>
-            <div class="flex flex-wrap gap-2 text-xs">
-              <span class="skill-pill">React</span> <span class="skill-pill">Node.js</span> <span
-                class="skill-pill">PHP</span> <span class="skill-pill">JavaScript</span>
-              <span class="skill-pill">C#</span> <span class="skill-pill">Lua</span> <span class="skill-pill">SQL</span>
-              <span class="skill-pill">Vite</span>
-              <span class="skill-pill">Tailwind</span> <span class="skill-pill">Bootstrap</span> <span
-                class="skill-pill">Git</span> <span class="skill-pill">XAMPP</span>
-              <span class="skill-pill">FileZilla</span> <span class="skill-pill">VS Code</span> <span
-                class="skill-pill">Warp</span>
-            </div>
-          </div>
-          <div>
-            <p class="text-[10px] font-bold text-gray-400 uppercase mb-4 tracking-widest">Diseño & 3D</p>
-            <div class="flex flex-wrap gap-2 text-xs">
-              <span class="skill-pill-3d">Unity</span> <span class="skill-pill-3d">Unreal Engine</span> <span
-                class="skill-pill-3d">Blender</span> <span class="skill-pill-3d">Roblox Studio</span>
-              <span class="skill-pill-3d">Substance 3D</span> <span class="skill-pill-3d">Zmodeler</span> <span
-                class="skill-pill-3d">3DMAX</span> <span class="skill-pill-3d">Maya</span>
-              <span class="skill-pill-3d">After Effects</span> <span class="skill-pill-3d">Photoshop</span> <span
-                class="skill-pill-3d">Illustrator</span> <span class="skill-pill-3d">Premiere</span> <span
-                class="skill-pill-3d">Figma</span>
-            </div>
-          </div>
-          <div class="md:col-span-2">
-            <p class="text-[10px] font-bold text-gray-400 uppercase mb-4 tracking-widest">Potenciadores de IA</p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3">
 
-              <!-- Antigravity Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/antigravity-color.svg" title="Antigravity" alt="Antigravity"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Antigravity</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-blue-600 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Gemini Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/gemini-color.svg" title="Gemini" alt="Gemini"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Gemini</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-[#1A73E8] w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Claude Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/claude-color.svg" title="Claude" alt="Claude"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Claude</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-[#D97757] w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- OpenAI Card -->
-              <div data-lvl="95"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/openai.svg" title="OpenAI" alt="OpenAI"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">OpenAI</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-[#74AA9C] w-0 group-hover: group-[.is-active]:w-[95%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Kimi AI Card -->
-              <div data-lvl="80"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/kimi-ai-icon.svg" title="Kimi AI" alt="Kimi AI"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Kimi
-                    AI</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-[#10B981] w-0 group-hover: group-[.is-active]:w-[80%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Copilot Card -->
-              <div data-lvl="80"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/copilot-color.svg" title="Copilot" alt="Copilot"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Copilot</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-[#3B82F6] w-0 group-hover: group-[.is-active]:w-[80%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- n8n Card -->
-              <div data-lvl="50"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/n8n-icon.svg" title="n8n" alt="n8n"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">n8n</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-[#FF6D5A] w-0 group-hover: group-[.is-active]:w-[50%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Hugging Face Card -->
-              <div data-lvl="25"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/Hugging-Face-Icon--Streamline-Svg-Logos.svg" title="Hugging Face"
-                    alt="Hugging Face"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Hugging
-                    Face</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-[#FFD21E] w-0 group-hover: group-[.is-active]:w-[25%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="md:col-span-2">
-            <p class="text-[10px] font-bold text-gray-400 uppercase mb-4 tracking-widest">Gestión</p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3">
-
-              <!-- Trello Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/trello-logo-icon.svg" title="Trello" alt="Trello"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Trello</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <!-- Expanding Progress Bar -->
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-blue-500 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Notion Card -->
-              <div data-lvl="90"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/notion-icon.svg" title="Notion" alt="Notion"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Notion</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-black w-0 group-hover: group-[.is-active]:w-[90%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Millanote Card -->
-              <div data-lvl="80"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/Milanote--Streamline-Simple-Icons.svg" title="Millanote" alt="Millanote"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Millanote</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-black w-0 group-hover: group-[.is-active]:w-[80%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Office 365 Card -->
-              <div data-lvl="90"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/office-365-icon.svg" title="Office 365" alt="Office 365"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Office
-                    365</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-orange-500 w-0 group-hover: group-[.is-active]:w-[90%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Google Calendar Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/google-calendar-icon.svg" title="Google Calendar" alt="Google Calendar"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Google
-                    Calendar</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-green-600 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Google Chat Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/google-chat-icon.svg" title="Google Chat" alt="Google Chat"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Google
-                    Chat</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-green-600 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Gmail Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/gmail-icon.svg" title="Google Gmail" alt="Google Gmail"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Gmail</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-red-500 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Google Classroom Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/google-classroom-icon.svg" title="Google Classroom" alt="Google Classroom"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Classroom</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-yellow-600 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Google Drive/Meet Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/google-drive-color-icon.svg" title="Google Drive" alt="Google Drive"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Drive</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-yellow-500 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Google Docs Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/google-docs-icon.svg" title="Google Docs" alt="Google Docs"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Docs</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-blue-400 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-              <!-- Google Task Card -->
-              <div data-lvl="100"
-                class="skill-card relative flex flex-col items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 group overflow-hidden h-28">
-                <div
-                  class="w-10 h-10 flex items-center justify-center mb-2 transition-transform duration-300 group-hover: group-[.is-active]:-translate-y-1">
-                  <img src="src/assets/icons/Google_Tasks_2021.svg" title="Google Tasks" alt="Google Tasks"
-                    class="w-full h-full object-contain filter grayscale opacity-60 group-hover: group-[.is-active]:grayscale-0 group-hover: group-[.is-active]:opacity-100 transition-all duration-300">
-                </div>
-                <div class="relative h-4 w-full flex justify-center items-center">
-                  <span
-                    class="text-[11px] font-semibold text-gray-700 transition-all duration-300 group-hover: group-[.is-active]:opacity-0 group-hover: group-[.is-active]:scale-50">Tasks</span>
-                  <span
-                    class="absolute inset-0 flex justify-center items-center text-[10px] font-bold text-gray-800 opacity-0 scale-50 group-hover: group-[.is-active]:opacity-100 group-hover: group-[.is-active]:scale-100 transition-all duration-300">Apropiación</span>
-                </div>
-                <div
-                  class="absolute bottom-0 left-0 w-full h-1 bg-gray-100 group-hover: group-[.is-active]:h-8 transition-all duration-300 ease-out overflow-hidden flex items-center justify-center">
-                  <div
-                    class="absolute top-0 left-0 h-full bg-blue-400 w-0 group-hover: group-[.is-active]:w-[100%] transition-all duration-700 ease-in-out">
-                  </div>
-                  <span
-                    class="skill-pct relative z-10 text-[10px] font-bold text-white opacity-0 group-hover: group-[.is-active]:opacity-100 transition-opacity duration-300 delay-100">0%</span>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer class="md:col-span-12 mt-16 text-center text-gray-400 text-sm pb-12">
+      <footer class="max-w-6xl mx-auto px-4 mt-16 text-center text-gray-400 text-sm pb-12">
         <div class="flex justify-center gap-6 mb-8 opacity-40">
           <div class="w-8 h-[2px] bg-red-500"></div>
           <div class="w-8 h-[2px] bg-blue-500"></div>
@@ -783,88 +959,86 @@
         <p class="mt-2 font-light text-[10px] uppercase tracking-[0.4em]">Google Developer Group Bogotá - Member</p>
       </footer>
 
+      <!-- Layout Script -->
+      <script>
+        const btn = document.getElementById('viewMoreEx');
+        const extra = document.getElementById('extraExp');
+        btn?.addEventListener('click', () => {
+          extra.classList.toggle('hidden');
+          btn.innerText = extra.classList.contains('hidden') ? 'Ver trayectoria completa' : 'Ver menos';
+        });
+
+        // Skill Cards Animation Logic
+        const allCards = document.querySelectorAll('.skill-card');
+        allCards.forEach(card => {
+          let animationFrame;
+          const display = card.querySelector('.skill-pct');
+          const target = parseInt(card.dataset.lvl);
+
+          const stopAnim = () => {
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+            display.innerText = '0%';
+            card.classList.remove('is-active');
+          };
+
+          const startAnim = () => {
+            // On touch devices, reset other cards first for clarity
+            if (window.matchMedia("(max-width: 768px)").matches) {
+              allCards.forEach(c => { if (c !== card) c.dispatchEvent(new Event('mouseleave')); });
+            }
+
+            card.classList.add('is-active');
+
+            const duration = 700;
+            const start = performance.now();
+            function animate(now) {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeOutQuad = t => t * (2 - t);
+              const currentVal = Math.floor(easeOutQuad(progress) * target);
+              display.innerText = currentVal + '%';
+              if (progress < 1) animationFrame = requestAnimationFrame(animate);
+            }
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+            animationFrame = requestAnimationFrame(animate);
+          };
+
+          card.addEventListener('mouseenter', startAnim);
+          card.addEventListener('mouseleave', stopAnim);
+          // Mobile Touch Support
+          card.addEventListener('touchstart', () => {
+            startAnim();
+          }, { passive: true });
+        });
+        // Contact Reveal Logic
+        const setupReveal = (id, part1, part2, part3, isTel = false) => {
+          const el = document.getElementById(id);
+          el?.addEventListener('click', () => {
+            const content = `${part1}${part2}${part3}`;
+            if (isTel) {
+              window.location.href = `tel:${content}`;
+            } else {
+              const span = el.querySelector('span');
+              span.innerText = content;
+              el.classList.add('bg-white/20');
+              // Change to link after reveal
+              setTimeout(() => {
+                const link = document.createElement('a');
+                link.href = `mailto:${content}`;
+                link.className = el.className;
+                link.innerHTML = el.innerHTML;
+                el.replaceWith(link);
+              }, 100);
+            }
+          }, { once: true });
+        };
+
+        // Security: Emails are built from parts to evade simple scrapers
+        setupReveal('revealEmail1', 'nicolas.', 'romeroc', '@hotmail.com');
+        setupReveal('revealEmail2', 'jeefry_archila', '@soy.', 'sena.edu.co');
+      </script>
     </div>
-
-    <!-- Layout Script -->
-    <script>
-      const btn = document.getElementById('viewMoreEx');
-      const extra = document.getElementById('extraExp');
-      btn?.addEventListener('click', () => {
-        extra.classList.toggle('hidden');
-        btn.innerText = extra.classList.contains('hidden') ? 'Ver trayectoria completa' : 'Ver menos';
-      });
-
-      // Skill Cards Animation Logic
-      const allCards = document.querySelectorAll('.skill-card');
-      allCards.forEach(card => {
-        let animationFrame;
-        const display = card.querySelector('.skill-pct');
-        const target = parseInt(card.dataset.lvl);
-
-        const stopAnim = () => {
-          if (animationFrame) cancelAnimationFrame(animationFrame);
-          display.innerText = '0%';
-          card.classList.remove('is-active');
-        };
-
-        const startAnim = () => {
-          // On touch devices, reset other cards first for clarity
-          if (window.matchMedia("(max-width: 768px)").matches) {
-            allCards.forEach(c => { if (c !== card) c.dispatchEvent(new Event('mouseleave')); });
-          }
-
-          card.classList.add('is-active');
-
-          const duration = 700;
-          const start = performance.now();
-          function animate(now) {
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const easeOutQuad = t => t * (2 - t);
-            const currentVal = Math.floor(easeOutQuad(progress) * target);
-            display.innerText = currentVal + '%';
-            if (progress < 1) animationFrame = requestAnimationFrame(animate);
-          }
-          if (animationFrame) cancelAnimationFrame(animationFrame);
-          animationFrame = requestAnimationFrame(animate);
-        };
-
-        card.addEventListener('mouseenter', startAnim);
-        card.addEventListener('mouseleave', stopAnim);
-        // Mobile Touch Support
-        card.addEventListener('touchstart', () => {
-          startAnim();
-        }, { passive: true });
-      });
-      // Contact Reveal Logic
-      const setupReveal = (id, part1, part2, part3, isTel = false) => {
-        const el = document.getElementById(id);
-        el?.addEventListener('click', () => {
-          const content = `${part1}${part2}${part3}`;
-          if (isTel) {
-            window.location.href = `tel:${content}`;
-          } else {
-            const span = el.querySelector('span');
-            span.innerText = content;
-            el.classList.add('bg-white/20');
-            // Change to link after reveal
-            setTimeout(() => {
-              const link = document.createElement('a');
-              link.href = `mailto:${content}`;
-              link.className = el.className;
-              link.innerHTML = el.innerHTML;
-              el.replaceWith(link);
-            }, 100);
-          }
-        }, { once: true });
-      };
-
-      // Security: Emails are built from parts to evade simple scrapers
-      setupReveal('revealEmail1', 'nicolas.', 'romeroc', '@hotmail.com');
-      setupReveal('revealEmail2', 'jeefry_archila', '@soy.', 'sena.edu.co');
-    </script>
-  </div>
-  <script type="module" src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 
 </html>
