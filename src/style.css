@@ -114,4 +114,53 @@ body {
     @apply relative overflow-hidden py-12;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
+
+  /* Vanguardista Experience Section */
+  .experience-timeline {
+    perspective: 1000px;
+  }
+
+  .experience-item {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .experience-content {
+    @apply transition-all duration-500 transform-gpu;
+    backface-visibility: hidden;
+  }
+
+  .experience-item:hover .experience-content {
+    @apply -translate-y-1 translate-x-1 shadow-lg border-blue-100/50 bg-[#F8FAFF];
+  }
+
+  .experience-item[data-status="active"] .timeline-dot {
+    @apply animate-pulse;
+    box-shadow: 0 0 0 0 rgba(251, 188, 4, 0.7);
+    animation: pulse-yellow 2s infinite;
+  }
+
+  @keyframes pulse-yellow {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(251, 188, 4, 0.7);
+    }
+
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(251, 188, 4, 0);
+    }
+
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(251, 188, 4, 0);
+    }
+  }
+
+  .timeline-dot {
+    @apply transition-all duration-300;
+  }
+
+  .experience-item:hover .timeline-dot {
+    @apply scale-150;
+  }
 }

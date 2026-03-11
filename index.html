@@ -144,62 +144,120 @@
           </div>
         </section>
 
-        <!-- General Experience -->
-        <section class="md:col-span-12 lg:col-span-5 bento-card overflow-hidden">
-          <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+        <!-- General Experience - Vanguardista Redesign -->
+        <section class="md:col-span-12 lg:col-span-5 bento-card overflow-hidden flex flex-col">
+          <h2 class="text-2xl font-semibold mb-8 flex items-center gap-2">
             <span class="google-yellow">📅</span> Trayectoria Profesional
           </h2>
-          <div
-            class="space-y-3 relative before:absolute before:left-[1.25rem] before:top-2 before:bottom-2 before:w-[2px] before:bg-gray-100">
-            <!-- Newest to Oldest -->
-            <div class="relative pl-9 group">
-              <div
-                class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-[#FBBC04] ring-4 ring-white transition-transform group-hover:scale-125">
-              </div>
-              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2023 - Actualidad</p>
-              <p class="text-sm font-bold text-gray-700">Líder de aprendices – SENA</p>
+
+          <div class="experience-timeline relative space-y-6 flex-grow">
+            <!-- Timeline Line -->
+            <div
+              class="absolute left-[1.25rem] top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#FBBC04] via-gray-100 to-gray-100/50">
             </div>
-            <div class="relative pl-9 group">
+
+            <!-- Item 1: Oromiel (Current) -->
+            <div class="experience-item relative pl-10 group" data-status="active">
               <div
-                class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
+                class="timeline-dot absolute left-4 top-1.5 w-3 h-3 rounded-full bg-[#FBBC04] ring-4 ring-[#FBBC04]/20 z-10 transition-all duration-300 group-hover:scale-125 group-hover:ring-[#FBBC04]/40">
               </div>
-              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2022</p>
-              <p class="text-sm font-bold text-gray-700">Cangurero en peaje – El Charquito</p>
+              <div
+                class="experience-content p-4 rounded-2xl bg-[#FFFBF0] border border-[#FFE7A3] group-hover:shadow-md transition-all duration-300">
+                <span class="text-[10px] text-[#D99000] font-black uppercase tracking-widest block mb-1">Actividad
+                  Actual</span>
+                <h3 class="text-sm font-bold text-gray-800 uppercase">Productor apícola – OROMIEL</h3>
+              </div>
             </div>
-            <div class="relative pl-9 group">
+            <!-- Item 2: Escole -->
+            <div class="experience-item relative pl-10 group">
               <div
-                class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
+                class="timeline-dot absolute left-4 top-1.5 w-3 h-3 rounded-full bg-gray-300 ring-4 ring-white z-10 transition-all duration-300 group-hover:scale-125 group-hover:bg-[#1A73E8] group-hover:ring-blue-100">
               </div>
-              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2022</p>
-              <p class="text-sm font-bold text-gray-700">Guardia de Vigilancia – MGS Total SAS</p>
+              <div
+                class="experience-content p-4 rounded-2xl bg-white border border-gray-100 group-hover:border-blue-100 group-hover:shadow-sm transition-all duration-300">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1">2025 -
+                  2026</span>
+                <h3 class="text-sm font-bold text-gray-700">Practicante de Tecnólogo de Producción Multimedia – Escole Experiencias Educativas S.A.S</h3>
+              </div>
             </div>
-            <div class="relative pl-9 group">
+            <!-- Item 2: SENA (2023-2025) -->
+            <div class="experience-item relative pl-10 group">
               <div
-                class="absolute left-4 top-1.5 w-2.5 h-2.5 rounded-full bg-gray-300 ring-4 ring-white transition-transform group-hover:scale-125">
+                class="timeline-dot absolute left-4 top-1.5 w-3 h-3 rounded-full bg-gray-300 ring-4 ring-white z-10 transition-all duration-300 group-hover:scale-125 group-hover:bg-[#1A73E8] group-hover:ring-blue-100">
               </div>
-              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2020 - 2021</p>
-              <p class="text-sm font-bold text-gray-700">Vendedor puerta a puerta</p>
+              <div
+                class="experience-content p-4 rounded-2xl bg-white border border-gray-100 group-hover:border-blue-100 group-hover:shadow-sm transition-all duration-300">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1">2023 -
+                  2025</span>
+                <h3 class="text-sm font-bold text-gray-700">Representante de aprendices y Líder – SENA</h3>
+              </div>
+            </div>
+
+            <!-- Item 3: El Charquito (2022) -->
+            <div class="experience-item relative pl-10 group">
+              <div
+                class="timeline-dot absolute left-4 top-1.5 w-3 h-3 rounded-full bg-gray-300 ring-4 ring-white z-10 transition-all duration-300 group-hover:scale-125 group-hover:bg-gray-400">
+              </div>
+              <div
+                class="experience-content p-4 rounded-2xl bg-white border border-gray-100 group-hover:shadow-sm transition-all duration-300">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1">2022</span>
+                <h3 class="text-sm font-bold text-gray-700">Cangurero en peaje – El Charquito</h3>
+              </div>
+            </div>
+
+            <!-- Item 4: MGS Total (2022) -->
+            <div class="experience-item relative pl-10 group">
+              <div
+                class="timeline-dot absolute left-4 top-1.5 w-3 h-3 rounded-full bg-gray-300 ring-4 ring-white z-10 transition-all duration-300 group-hover:scale-125 group-hover:bg-gray-400">
+              </div>
+              <div
+                class="experience-content p-4 rounded-2xl bg-white border border-gray-100 group-hover:shadow-sm transition-all duration-300">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1">2022</span>
+                <h3 class="text-sm font-bold text-gray-700">Guardia de Vigilancia – MGS Total SAS</h3>
+              </div>
+            </div>
+
+            <!-- Extra items toggled via JS -->
+            <div id="extraExp" class="hidden space-y-6 pt-6 border-t border-gray-50">
+              <div class="experience-item relative pl-10 group">
+              <div
+                class="timeline-dot absolute left-4 top-1.5 w-3 h-3 rounded-full bg-gray-300 ring-4 ring-white z-10 transition-all duration-300 group-hover:scale-125 group-hover:bg-gray-400">
+              </div>
+              <div
+                class="experience-content p-4 rounded-2xl bg-white border border-gray-100 group-hover:shadow-sm transition-all duration-300">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1">2020 -
+                  2021</span>
+                <h3 class="text-sm font-bold text-gray-700">Vendedor puerta a puerta</h3>
+              </div>
+            </div>
+              <div class="experience-item relative pl-10 group">
+                <div
+                  class="timeline-dot absolute left-4 top-1.5 w-3 h-3 rounded-full bg-gray-200 ring-4 ring-white z-10 transition-all duration-300 group-hover:scale-125">
+                </div>
+                <div
+                  class="experience-content p-4 rounded-2xl bg-white border border-gray-100 group-hover:shadow-sm transition-all duration-300">
+                  <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1">2019 -
+                    2020</span>
+                  <h3 class="text-sm font-bold text-gray-700">Comercial – Textiles Gaviota</h3>
+                </div>
+              </div>
+              <div class="experience-item relative pl-10 group">
+                <div
+                  class="timeline-dot absolute left-4 top-1.5 w-3 h-3 rounded-full bg-gray-200 ring-4 ring-white z-10 transition-all duration-300 group-hover:scale-125">
+                </div>
+                <div
+                  class="experience-content p-4 rounded-2xl bg-white border border-gray-100 group-hover:shadow-sm transition-all duration-300">
+                  <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1">2019</span>
+                  <h3 class="text-sm font-bold text-gray-700">Profesor sustituto – María Reina</h3>
+                </div>
+              </div>
             </div>
           </div>
+
           <button id="viewMoreEx"
-            class="w-full mt-6 py-2 text-xs font-bold text-[#1A73E8] border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors uppercase tracking-widest">
+            class="w-full mt-8 py-3 text-xs font-black text-[#1A73E8] bg-blue-50/50 hover:bg-blue-50 border border-blue-100/50 rounded-2xl transition-all uppercase tracking-[0.2em]">
             Ver trayectoria completa
           </button>
-          <!-- Hidden Additional History -->
-          <div id="extraExp" class="hidden mt-4 space-y-3 pt-4 border-t border-gray-50 transition-all duration-500">
-            <div class="relative pl-9">
-              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2019-2020</p>
-              <p class="text-sm font-bold text-gray-700">Comercial – Textiles Gaviota</p>
-            </div>
-            <div class="relative pl-9">
-              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">2019</p>
-              <p class="text-sm font-bold text-gray-700">Profesor sustituto – María Reina</p>
-            </div>
-            <div class="relative pl-9">
-              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Actividad Actual</p>
-              <p class="text-sm font-bold text-gray-700 uppercase">Productor apícola – OROMIEL</p>
-            </div>
-          </div>
         </section>
 
         <!-- Education & Certs -->
@@ -955,7 +1013,7 @@
           <div class="w-8 h-[2px] bg-green-500"></div>
           <div class="w-8 h-[2px] bg-yellow-500"></div>
         </div>
-        <p>&copy; 2025 Jeefry Nicolas Archila Romero | Ultima Actualización: 02/03/2026</p>
+        <p>&copy; 2025 Jeefry Nicolas Archila Romero | Ultima Actualización: 10/03/2026</p>
         <p class="mt-2 font-light text-[10px] uppercase tracking-[0.4em]">Google Developer Group Bogotá - Member</p>
       </footer>
 
