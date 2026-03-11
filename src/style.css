@@ -163,4 +163,14 @@ body {
   .experience-item:hover .timeline-dot {
     @apply scale-150;
   }
+
+  /* Typewriter Cursor Animation */
+  @keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: #1A73E8; }
+  }
+
+  #typewriter {
+    animation: blink 0.8s step-end infinite;
+  }
 }
