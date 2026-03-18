@@ -17,7 +17,7 @@ export async function renderPostsByCategory(category, containerId) {
     try {
         const q = query(
             collection(db, "posts"),
-            where("categoria", "==", category),
+            where("categorias", "array-contains", category), // New: supports multi-category
             orderBy("fechaCreacion", "desc")
         );
         

@@ -161,6 +161,12 @@ const applyFormat = (type) => {
         case 'quote':
             replacement = `\n> ${selectedText || 'cita'}\n`;
             break;
+        case 'code':
+            replacement = `\n\`\`\`javascript\n${selectedText || '// código aquí'}\n\`\`\`\n`;
+            break;
+        case 'rule':
+            replacement = `\n---\n`;
+            break;
     }
 
     postContent.value = fullText.substring(0, start) + replacement + fullText.substring(end);
@@ -226,7 +232,19 @@ createPostForm.addEventListener('submit', async (e) => {
     
     const title = document.getElementById('postTitle').value.trim();
     const content = document.getElementById('postContent').value.trim();
-    const category = document.getElementById('postCategory').value;
+    const customDate = document.getElementById('postDate').value;
+    
+    // Collect Categories (Multi)
+    const selectedCategories = [];
+    document.querySelectorAll('input[name="postCategories[]"]:checked').forEach(checkbox => {
+        selectedCategories.push(checkbox.value);
+    });
+
+    if (selectedCategories.length === 0) {
+        showStatus('Por favor selecciona al menos una categoría.', true);
+        setPublishingState(false);
+        return;
+    }
     
     // Collect Images
     const imageUrls = [];
@@ -245,19 +263,29 @@ createPostForm.addEventListener('submit', async (e) => {
     });
     
     try {
+        // Handle Date: if user provided one, convert it to Timestamp. 
+        // Note: HTML date input is YYYY-MM-DD (local time usually, but for firestore we can just use new Date())
+        let finalTimestamp = serverTimestamp();
+        if (customDate) {
+            // We set it to noon to avoid timezone issues shifting the day
+            const dateObj = new Date(customDate + 'T12:00:00'); 
+            finalTimestamp = dateObj; 
+        }
+
         const postData = {
             titulo: title,
             contenido: content,
-            categoria: category,
+            categorias: selectedCategories, // Using array for multi-category support
+            categoria: selectedCategories[0], // Keep legacy field for compatibility if needed
             imagenes: imageUrls,
             youtubeIds: youtubeIds,
-            fechaCreacion: serverTimestamp(),
+            fechaCreacion: finalTimestamp,
             likes: 0
         };
         
         await addDoc(collection(db, "posts"), postData);
         
-        showStatus('¡Publicación creada con éxito! Ya está disponible en la web publicálica.');
+        showStatus('¡Publicación creada con éxito! Se reflejará en todas las categorías seleccionadas.');
         
         // Reset Form
         createPostForm.reset();
@@ -293,11 +321,13 @@ async function loadPosts() {
             const date = data.fechaCreacion ? data.fechaCreacion.toDate().toLocaleDateString('es-ES') : 'Reciente';
             
             const tr = document.createElement('tr');
+            const categories = data.categorias ? data.categorias.join(', ') : data.categoria;
+
             tr.innerHTML = `
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${date}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                        ${data.categoria}
+                    <span class="px-2 inline-flex text-[10px] leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 max-w-[150px] truncate" title="${categories}">
+                        ${categories}
                     </span>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-gray-900">${data.titulo}</td>

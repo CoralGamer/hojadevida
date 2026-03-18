@@ -97,6 +97,11 @@
                                     <button type="button" data-format="quote" title="Cita" class="format-btn p-2 hover:bg-blue-50 text-gray-600 rounded-lg transition-colors" onclick="event.preventDefault()">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
                                     </button>
+                                    <div class="w-px h-6 bg-gray-200 mx-1"></div>
+                                    <button type="button" data-format="code" title="Bloque de Código" class="format-btn p-2 hover:bg-blue-50 text-gray-600 rounded-lg transition-colors" onclick="event.preventDefault()">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                    </button>
+                                    <button type="button" data-format="rule" title="Línea Horizontal" class="format-btn p-2 hover:bg-blue-50 text-gray-600 rounded-lg transition-colors font-bold text-[10px]" onclick="event.preventDefault()">—HR—</button>
                                 </div>
 
                                 <textarea id="postContent" rows="12" required
@@ -109,29 +114,68 @@
 
                 <!-- Media & Metadata Sidebar -->
                 <div class="space-y-6">
-                    <!-- Categorization -->
+                    <!-- Categorization (Multi-select) -->
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                         <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs">2</span>
-                            Destino
+                            Destinos (Multisección)
+                        </h2>
+                        <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-2">
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="game-development" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">Game Development</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="web-fullstack" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">Web Fullstack</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="vr-experiences" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">VR Experiences</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="roblox" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">Roblox Studios</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="modelado-3d" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">Modelado 3D</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="ia-automation" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">IA & Automation</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="produccion-multimedia" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">Post-Producción</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="project-management" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">Project Management</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="educacion-digital" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">Educación Digital</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" name="postCategories[]" value="soporte-tecnico" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">Soporte Técnico</span>
+                            </label>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 italic">Selecciona uno o más servicios donde aparecerá el post.</p>
+                    </div>
+
+                    <!-- Scheduling / Dates -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                             <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Fecha (Opcional)
                         </h2>
                         <div>
-                            <label for="postCategory" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Categoría del Servicio</label>
-                            <select id="postCategory" required
-                                class="block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 focus:bg-white text-sm font-medium">
-                                <option value="" disabled selected>Selecciona una página</option>
-                                <option value="game-development">Game Development</option>
-                                <option value="web-fullstack">Web Fullstack</option>
-                                <option value="vr-experiences">VR Experiences</option>
-                                <option value="roblox">Roblox Studios</option>
-                                <option value="modelado-3d">Modelado 3D</option>
-                                <option value="ia-automation">IA & Automation</option>
-                                <option value="produccion-multimedia">Post-Producción</option>
-                                <option value="project-management">Project Management</option>
-                                <option value="educacion-digital">Educación Digital</option>
-                                <option value="soporte-tecnico">Soporte Técnico</option>
-                            </select>
-                            <p class="text-xs text-gray-500 mt-2 italic">Este post solo aparecerá en la página seleccionada.</p>
+                            <label for="postDate" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Fecha de Publicación</label>
+                            <input type="date" id="postDate" 
+                                class="block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 focus:bg-white text-sm">
+                            <p class="text-[10px] text-gray-500 mt-2 italic">Déjalo vacío para usar la fecha actual (automática).</p>
                         </div>
                     </div>
 
