@@ -153,7 +153,12 @@ const applyFormat = (type) => {
             break;
         case 'link':
             replacement = `[${selectedText || 'texto'}](https://example.com)`;
-            newCursorPos = start + (selectedText ? replacement.length : 1);
+            break;
+        case 'image':
+            replacement = `![${selectedText || 'descripción'}](https://example.com/imagen.jpg)`;
+            break;
+        case 'table':
+            replacement = `\n| Cabecera 1 | Cabecera 2 |\n| ----------- | ----------- |\n| Celda 1 | Celda 2 |\n`;
             break;
         case 'list':
             replacement = `\n- ${selectedText || 'elemento'}\n`;
