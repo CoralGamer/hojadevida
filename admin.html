@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración – Blog</title>
+    <link rel="stylesheet" href="src/style.css">
+    <!-- Carga CSS compilado por Vite en desarrollo, en producción usa el dist -->
+</head>
+
+<body class="bg-[#F1F3F4] text-[#1F1F1F] min-h-screen hidden" id="adminBody">
+    
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#1A73E8] to-[#EA4335] text-white flex items-center justify-center font-bold text-sm">
+                        A
+                    </div>
+                    <span class="font-bold text-lg text-gray-800">Panel Admin</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-800 uppercase tracking-widest ml-2">Secure</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="adminEmailDisplay" class="text-sm font-medium text-gray-600 hidden md:block"></span>
+                    <button id="logoutBtn" class="text-sm font-bold text-red-600 hover:text-red-800 hover:bg-red-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        Salir
+                    </button>
+                    <a href="./" target="_blank" class="text-sm font-bold text-[#1A73E8] hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                        Ver Sitio
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Tabs -->
+        <div class="mb-8 border-b border-gray-200">
+            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                <button id="tabCreate" class="tab-btn active w-1/2 md:w-auto text-center border-b-2 border-[#1A73E8] py-4 px-1 text-sm font-bold text-[#1A73E8] flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    Nuevo Post
+                </button>
+                <button id="tabModerate" class="tab-btn w-1/2 md:w-auto text-center border-b-2 border-transparent py-4 px-1 text-sm font-bold text-gray-500 hover:text-gray-700 hover:border-gray-300 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Moderación
+                </button>
+            </nav>
+        </div>
+
+        <!-- Create Post Section -->
+        <section id="sectionCreate">
+            <form id="createPostForm" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Main Content Edit -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h2 class="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs">1</span>
+                            Contenido Principal
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="postTitle" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Título de la Publicación</label>
+                                <input type="text" id="postTitle" required
+                                    class="block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 focus:bg-white text-lg font-medium"
+                                    placeholder="Ej. Nuevo Masterclass en Diseño UX">
+                            </div>
+                            
+                            <div>
+                                <label for="postContent" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Contenido (Admite Markdown básico)</label>
+                                <textarea id="postContent" rows="10" required
+                                    class="block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 focus:bg-white resize-y"
+                                    placeholder="Escribe el cuerpo de tu artículo aquí... Puedes usar saltos de línea y HTML básico si lo necesitas."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Media & Metadata Sidebar -->
+                <div class="space-y-6">
+                    <!-- Categorization -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs">2</span>
+                            Destino
+                        </h2>
+                        <div>
+                            <label for="postCategory" class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Categoría del Servicio</label>
+                            <select id="postCategory" required
+                                class="block w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 focus:bg-white text-sm font-medium">
+                                <option value="" disabled selected>Selecciona una página</option>
+                                <option value="game-development">Game Development</option>
+                                <option value="web-fullstack">Web Fullstack</option>
+                                <option value="vr-experiences">VR Experiences</option>
+                                <option value="roblox">Roblox Studios</option>
+                                <option value="modelado-3d">Modelado 3D</option>
+                                <option value="ia-automation">IA & Automation</option>
+                                <option value="produccion-multimedia">Post-Producción</option>
+                                <option value="project-management">Project Management</option>
+                                <option value="educacion-digital">Educación Digital</option>
+                                <option value="soporte-tecnico">Soporte Técnico</option>
+                            </select>
+                            <p class="text-xs text-gray-500 mt-2 italic">Este post solo aparecerá en la página seleccionada.</p>
+                        </div>
+                    </div>
+
+                    <!-- Media: Images -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-[#34A853]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                Imágenes
+                            </h2>
+                            <button type="button" id="addImageBtn" class="text-xs font-bold text-[#1A73E8] bg-blue-50 px-2 py-1 rounded-md hover:bg-blue-100">+ Añadir</button>
+                        </div>
+                        <div id="imageUrlsContainer" class="space-y-3">
+                            <!-- Image URL inputs appended here -->
+                            <p class="text-xs text-gray-400 italic" id="imgEmptyText">No hay imágenes añadidas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Media: YouTube -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-[#EA4335]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Videos YouTube
+                            </h2>
+                            <button type="button" id="addYoutubeBtn" class="text-xs font-bold text-[#EA4335] bg-red-50 px-2 py-1 rounded-md hover:bg-red-100">+ Añadir</button>
+                        </div>
+                        <div id="youtubeUrlsContainer" class="space-y-3">
+                            <!-- Youtube URL inputs appended here -->
+                            <p class="text-xs text-gray-400 italic" id="ytEmptyText">No hay videos añadidos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Publish Button -->
+                     <button type="submit" id="publishBtn"
+                        class="w-full flex justify-center py-4 px-4 border border-transparent rounded-2xl shadow-lg shadow-blue-500/30 text-base font-bold text-white bg-gradient-to-r from-[#1A73E8] to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all transform hover:-translate-y-1 gap-2 items-center">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                        <span id="publishText">PUBLICAR AHORA</span>
+                        <svg id="publishSpinner" class="hidden animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                    <!-- Status message -->
+                    <div id="publishStatus" class="hidden p-4 rounded-xl text-center text-sm font-bold"></div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Moderate Section -->
+        <section id="sectionModerate" class="hidden">
+           <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold text-gray-800">Posts Publicados</h2>
+                </div>
+                <!-- Tabla de posts -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Fecha</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Categoría</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Título</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Likes</th>
+                                <th scope="col" class="relative px-6 py-3"><span class="sr-only">Acciones</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody" class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">Cargando publicaciones...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+           </div>
+
+           <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold text-gray-800">Últimos Comentarios</h2>
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-bold rounded-full">Requieren moderación</span>
+                </div>
+                <!-- Lista de Comentarios -->
+                <div id="commentsContainer" class="space-y-4">
+                    <div class="text-center py-8 text-gray-500 text-sm">Cargando comentarios...</div>
+                </div>
+           </div>
+        </section>
+
+    </div>
+
+    <!-- Script de lógica admin -->
+    <script type="module" src="/src/js/admin.js"></script>
+</body>
+</html>
