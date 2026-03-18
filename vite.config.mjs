@@ -29,7 +29,7 @@ export default defineConfig({
         iaAutomation: resolve(__dirname, 'pages/servicios/ia-automation.html'),
         gameDevelopment: resolve(__dirname, 'pages/servicios/game-development.html'),
         educacionDigital: resolve(__dirname, 'pages/servicios/educacion-digital.html'),
-        projectManagement: resolve(__dirname, 'pages/project-management.html'),
+        projectManagement: resolve(__dirname, 'pages/servicios/project-management.html'),
       }
     }
   }
