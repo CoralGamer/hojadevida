@@ -117,7 +117,8 @@ function createPostElement(postId, data, categoryPath) {
     }
 
     // Pie del Post (Interacciones)
-    const urlCompartir = `${window.location.origin}/pages/${categoryPath}.html#post-${postId}`;
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const urlCompartir = `${window.location.origin}${baseUrl}pages/servicios/${categoryPath}.html#post-${postId}`;
     const likesKey = `liked_${postId}`;
     const hasLiked = localStorage.getItem(likesKey) === 'true';
 
