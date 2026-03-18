@@ -174,3 +174,56 @@ body {
     animation: blink 0.8s step-end infinite;
   }
 }
+
+/* Markdown Typography (Prose) */
+.prose {
+  @apply text-gray-600 leading-relaxed;
+}
+
+.prose h1 {
+  @apply text-3xl font-bold text-gray-900 mt-8 mb-4;
+}
+
+.prose h2 {
+  @apply text-2xl font-bold text-gray-800 mt-6 mb-3;
+}
+
+.prose p {
+  @apply mb-4;
+}
+
+.prose strong {
+  @apply font-bold text-gray-900;
+}
+
+.prose em {
+  @apply italic;
+}
+
+.prose ul {
+  @apply list-disc list-inside mb-4 space-y-1;
+}
+
+.prose ol {
+  @apply list-decimal list-inside mb-4 space-y-1;
+}
+
+.prose li {
+  @apply ml-2;
+}
+
+.prose a {
+  @apply text-[#1A73E8] hover:underline font-medium;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-blue-200 pl-4 py-1 italic text-gray-500 mb-4 bg-blue-50/50 rounded-r-lg;
+}
+
+.prose code {
+  @apply bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono text-red-600;
+}
+
+.prose pre {
+  @apply bg-gray-900 text-gray-100 p-4 rounded-xl mb-4 overflow-x-auto text-sm font-mono;
+}

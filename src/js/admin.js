@@ -123,6 +123,70 @@ addYoutubeBtn.addEventListener('click', () => {
 });
 
 // ==========================================
+// 3.1 MARKDOWN TOOLBAR LOGIC
+// ==========================================
+const postContent = document.getElementById('postContent');
+
+const applyFormat = (type) => {
+    const start = postContent.selectionStart;
+    const end = postContent.selectionEnd;
+    const selectedText = postContent.value.substring(start, end);
+    const fullText = postContent.value;
+    
+    let replacement = '';
+    let newCursorPos = start;
+
+    switch (type) {
+        case 'bold':
+            replacement = `**${selectedText || 'texto'}**`;
+            newCursorPos = start + (selectedText ? replacement.length : 2);
+            break;
+        case 'italic':
+            replacement = `*${selectedText || 'texto'}*`;
+            newCursorPos = start + (selectedText ? replacement.length : 1);
+            break;
+        case 'h1':
+            replacement = `\n# ${selectedText || 'Título 1'}\n`;
+            break;
+        case 'h2':
+            replacement = `\n## ${selectedText || 'Título 2'}\n`;
+            break;
+        case 'link':
+            replacement = `[${selectedText || 'texto'}](https://example.com)`;
+            newCursorPos = start + (selectedText ? replacement.length : 1);
+            break;
+        case 'list':
+            replacement = `\n- ${selectedText || 'elemento'}\n`;
+            break;
+        case 'quote':
+            replacement = `\n> ${selectedText || 'cita'}\n`;
+            break;
+    }
+
+    postContent.value = fullText.substring(0, start) + replacement + fullText.substring(end);
+    postContent.focus();
+    
+    // Set selection for better UX
+    if (selectedText) {
+        postContent.setSelectionRange(start + replacement.length, start + replacement.length);
+    } else {
+        // If nothing was selected, select the placeholder text
+        const placeholderMatch = replacement.match(/texto|Título 1|Título 2|elemento|cita|https:\/\/example\.com/);
+        if (placeholderMatch) {
+            const pStart = start + replacement.indexOf(placeholderMatch[0]);
+            postContent.setSelectionRange(pStart, pStart + placeholderMatch[0].length);
+        }
+    }
+};
+
+document.querySelectorAll('.format-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const format = btn.getAttribute('data-format');
+        applyFormat(format);
+    });
+});
+
+// ==========================================
 // 4. PUBLISHING POSTS TO FIRESTORE
 // ==========================================
 const setPublishingState = (isPublishing) => {

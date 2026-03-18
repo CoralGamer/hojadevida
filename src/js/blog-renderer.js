@@ -1,3 +1,5 @@
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import { db } from '../firebase-config.js';
 import { collection, query, where, orderBy, getDocs, doc, updateDoc, increment } from "firebase/firestore";
 
@@ -75,12 +77,15 @@ function createPostElement(postId, data, categoryPath) {
     const dateStr = data.fechaCreacion ? data.fechaCreacion.toDate().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
     
     // Contenido Base
+    const rawHtml = marked.parse(data.contenido || '');
+    const cleanHtml = DOMPurify.sanitize(rawHtml);
+
     let html = `
         <div class="p-8">
             <span class="text-xs font-bold text-[#1A73E8] uppercase tracking-widest mb-3 block">${dateStr}</span>
             <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">${data.titulo}</h2>
-            <div class="prose prose-blue max-w-none text-gray-600 mb-8 whitespace-pre-line leading-relaxed text-lg">
-                ${escapeHTML(data.contenido)}
+            <div class="prose prose-blue max-w-none text-gray-600 mb-8 leading-relaxed text-lg">
+                ${cleanHtml}
             </div>
     `;
 
