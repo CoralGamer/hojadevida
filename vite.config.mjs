@@ -18,7 +18,6 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         admin: resolve(__dirname, 'admin.html'),
         adminLogin: resolve(__dirname, 'admin-login.html'),
-        informacion: resolve(__dirname, 'informacion.html'),
         serviciosIndex: resolve(__dirname, 'pages/servicios/index.html'),
         webFullstack: resolve(__dirname, 'pages/servicios/web-fullstack.html'),
         vrExperiences: resolve(__dirname, 'pages/servicios/vr-experiences.html'),
@@ -30,6 +29,7 @@ export default defineConfig({
         gameDevelopment: resolve(__dirname, 'pages/servicios/game-development.html'),
         educacionDigital: resolve(__dirname, 'pages/servicios/educacion-digital.html'),
         projectManagement: resolve(__dirname, 'pages/servicios/project-management.html'),
+        apicultura: resolve(__dirname, 'pages/servicios/apicultura.html'),
       }
     }
   }
