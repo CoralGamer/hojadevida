@@ -17,7 +17,7 @@ export async function renderPostsByCategory(category, containerId) {
     try {
         const q = query(
             collection(db, "posts"),
-            where("categorias", "array-contains", category), // New: supports multi-category
+            where("categorias", "array-contains", category),
             orderBy("fechaCreacion", "desc")
         );
         
@@ -47,230 +47,340 @@ export async function renderPostsByCategory(category, containerId) {
 
     } catch (error) {
         console.error("Error cargando posts: ", error);
-        let errorMsg = `<div class="col-span-full py-12 text-center text-red-500 font-medium">No se pudieron cargar las publicaciones. El sistema necesita crear un Índice en Firestore.</div>`;
-        
-        if (error.message && error.message.includes("https://console.firebase.google.com")) {
-            const linkMatch = error.message.match(/https:\/\/console\.firebase\.google\.com[^\s]*/);
-            if (linkMatch) {
-                errorMsg += `
-                    <div class="col-span-full text-center mt-4 animate-bounce">
-                        <a href="${linkMatch[0]}" target="_blank" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg transition-colors inline-block text-lg">
-                           👉 HAZ CLIC AQUÍ PARA CREAR EL ÍNDICE AUTOMÁTICAMENTE EN FIREBASE 👈
-                        </a>
-                        <p class="text-sm text-gray-500 mt-4 max-w-lg mx-auto">
-                            <strong>Instrucciones:</strong> Toca el botón azul de arriba. Se abrirá Firebase. Confirma la creación del índice dándole a <b>Crear</b>. Firebase tardará entre 2 a 5 minutos en compilarlo. Una vez termine, simplemente recarga esta página y verás tus posts mágicamente.
-                        </p>
-                    </div>`;
-            }
-        }
-        
+        let errorMsg = `<div class="col-span-full py-12 text-center text-red-500 font-medium">Error al cargar publicaciones.</div>`;
         container.innerHTML = errorMsg;
     }
 }
 
-function createPostElement(postId, data, categoryPath) {
+export function createPostElement(postId, data, categoryPath) {
     const article = document.createElement('article');
-    article.className = 'bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1';
+    article.className = 'post-card no-right-click';
     article.id = `post-${postId}`;
 
-    // Fecha
-    const dateStr = data.fechaCreacion ? data.fechaCreacion.toDate().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
-    
-    // Contenido Base
+    const toolIcons = {
+        'blender': 'blender',
+        'maya': 'autodeskmaya',
+        '3dmax': 'autodesk3dsmax',
+        'zmodeler': '3d-dot-com',
+        'substance-3d': 'adobesubstance3ddesign',
+        'unity': 'unity',
+        'unreal': 'unrealengine',
+        'roblox-studio': 'roblox',
+        'photoshop': 'adobephotoshop',
+        'illustrator': 'adobeillustrator',
+        'premiere': 'adobepremierepro',
+        'after-effects': 'adobeaftereffects',
+        'figma': 'figma',
+        'gemini': 'googlegemini',
+        'claude': 'anthropic',
+        'openai': 'openai',
+        'n8n': 'n8n',
+        'huggingface': 'huggingface',
+        'react': 'react',
+        'nodejs': 'nodedotjs',
+        'javascript': 'javascript',
+        'php': 'php',
+        'vite': 'vite',
+        'vscode': 'visualstudiocode',
+        'trello': 'trello',
+        'notion': 'notion',
+        'google-workspace': 'googleworkspace',
+        'office365': 'microsoftoffice'
+    };
+
     const rawHtml = marked.parse(data.contenido || '');
     const cleanHtml = DOMPurify.sanitize(rawHtml);
 
+    let toolsHtml = '';
+    if (data.herramientas && data.herramientas.length > 0) {
+        data.herramientas.forEach(tool => {
+            const slug = toolIcons[tool] || tool;
+            const iconUrl = tool === 'antigravity' 
+                ? '/hojadevida/src/assets/icons/antigravity-color.svg' 
+                : `https://cdn.simpleicons.org/${slug}`; // Not white hex, but original
+            toolsHtml += `<img src="${iconUrl}" class="tool-icon" data-tooltip="${tool.charAt(0).toUpperCase() + tool.slice(1)}" alt="${tool}">`;
+        });
+    }
+
+    const dateStr = data.fechaCreacion ? data.fechaCreacion.toDate().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Sin fecha';
+    const hasClient = data.cliente && !data.cliente.anonimo && (data.cliente.nombre || data.cliente.logo);
+
     let html = `
-        <div class="p-8">
-            <span class="text-xs font-bold text-[#1A73E8] uppercase tracking-widest mb-3 block">${dateStr}</span>
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">${data.titulo}</h2>
-            <div class="prose prose-blue max-w-none text-gray-600 mb-8 leading-relaxed text-lg">
-                ${cleanHtml}
-            </div>
-    `;
-
-    // Medios: Videos de YouTube (primero, para mayor impacto)
-    if (data.youtubeIds && data.youtubeIds.length > 0) {
-        html += `<div class="space-y-6 mb-8">`;
-        data.youtubeIds.forEach(id => {
-            html += `
-                <div class="relative w-full rounded-2xl overflow-hidden shadow-md" style="padding-top: 56.25%;">
-                    <iframe class="absolute top-0 left-0 w-full h-full border-0" 
-                        src="https://www.youtube.com/embed/${id}" 
-                        title="YouTube video player" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            `;
-        });
-        html += `</div>`;
-    }
-
-    // Medios: Imágenes Extras
-    if (data.imagenes && data.imagenes.length > 0) {
-        html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">`;
-        data.imagenes.forEach(url => {
-            html += `
-                <div class="relative group h-64 md:h-80 rounded-2xl overflow-hidden cursor-zoom-in" onclick="window.open('${url}', '_blank')">
-                    <img src="${url}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Imagen del post">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
-                </div>
-            `;
-        });
-        html += `</div>`;
-    }
-
-    // Pie del Post (Interacciones)
-    const baseUrl = import.meta.env.BASE_URL || '/';
-    const urlCompartir = `${window.location.origin}${baseUrl}pages/servicios/${categoryPath}.html#post-${postId}`;
-    const likesKey = `liked_${postId}`;
-    const hasLiked = localStorage.getItem(likesKey) === 'true';
-
-    html += `
-            <div class="pt-6 border-t border-gray-100 flex items-center justify-between">
-                <!-- Like Button -->
-                <button class="like-btn flex items-center gap-2 px-4 py-2 rounded-full font-bold transition-all ${hasLiked ? 'text-red-500 bg-red-50' : 'text-gray-500 bg-gray-50 hover:bg-red-50 hover:text-red-500'}" data-id="${postId}">
-                    <svg class="w-5 h-5 ${hasLiked ? 'fill-current' : 'fill-none stroke-2'} " stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                    <span class="like-count text-sm">${data.likes || 0}</span>
-                </button>
-                
-                <div class="flex gap-2">
-                    <!-- Share Button -->
-                    <button class="share-btn flex items-center gap-2 px-4 py-2 rounded-full text-gray-500 bg-gray-50 hover:bg-gray-100 font-bold transition-colors text-sm" data-title="${data.titulo}" data-url="${urlCompartir}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-                        Compartir
-                    </button>
-                    <!-- Comments Button placeholder -->
-                     <button class="comment-btn flex items-center gap-2 px-4 py-2 rounded-full text-blue-600 bg-blue-50 hover:bg-blue-100 font-bold transition-colors text-sm" data-id="${postId}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                        Comentarios
+        <div class="post-layout w-full border-b border-gray-100 overflow-hidden">
+            <!-- Information Column (Left) -->
+            <div class="post-info-column flex flex-col h-full bg-white relative">
+                <!-- Padding interior para el contenido -->
+                <div class="p-8 lg:p-12 flex-grow flex flex-col">
+                    <span class="text-[10px] font-black text-[#FF7A00] uppercase tracking-[0.2em] mb-4 block">${dateStr}</span>
+                    <h2 class="text-3xl lg:text-4xl font-black text-gray-900 mb-8 leading-tight tracking-tight">${data.titulo}</h2>
+                    
+                    <div class="post-content-container relative flex-grow" id="content-container-${postId}">
+                        <div class="prose max-w-none text-[#4A4A4A]">
+                            ${cleanHtml}
+                        </div>
+                        <div class="post-content-fade" id="content-fade-${postId}"></div>
+                    </div>
+                    
+                    <button class="mt-4 px-6 py-2 bg-gray-50 text-gray-600 rounded-full text-sm font-bold hover:bg-gray-100 transition-colors self-start flex items-center gap-2 ver-mas-btn shrink-0" id="ver-mas-${postId}">
+                        <span>Ver más detalle</span>
+                        <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                 </div>
-            </div>
-            
-            <!-- Comment Section Drawer (Hidden default) -->
-            <div id="comments-drawer-${postId}" class="mt-6 pt-6 border-t border-gray-100 hidden">
-                <h4 class="font-bold text-gray-800 mb-4">Comentarios</h4>
-                <!-- Input area -->
-                <div class="flex gap-3 mb-6">
-                    <div class="flex-shrink-0 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-xs uppercase">TU</div>
-                    <div class="flex-grow flex flex-col gap-2">
-                        <input type="text" id="comment-name-${postId}" placeholder="Tu nombre..." class="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none w-1/2">
-                        <div class="relative">
-                            <textarea id="comment-text-${postId}" rows="2" placeholder="Escribe un comentario amigable..." class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
-                            <button class="submit-comment-btn absolute bottom-3 right-3 text-blue-600 hover:bg-blue-50 p-1.5 rounded-lg transition-colors font-bold text-xs" data-id="${postId}">Enviar</button>
+
+                <!-- Tools & Client Bar (Bicolor) - Ahora sin spacing, full width -->
+                <div class="flex w-full items-stretch mt-auto min-h-[100px]">
+                    <div class="bg-[#F5A623] p-5 lg:p-8 flex flex-col justify-center gap-2 flex-[1.2] lg:flex-[1.5]">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-black/50">TOOLS USADAS</span>
+                        <div class="flex flex-wrap gap-2">
+                            ${toolsHtml}
                         </div>
                     </div>
+                    ${hasClient ? `
+                    <div class="bg-[#E5C494] p-5 lg:p-8 flex flex-col justify-center gap-2 flex-1 border-l border-white/20">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-black/50">CLIENTE</span>
+                        <a href="${data.cliente.link || '#'}" target="_blank" class="flex items-center gap-3 no-underline group/client hover:opacity-80 transition-opacity">
+                            ${data.cliente.logo ? `<img src="${data.cliente.logo}" class="w-10 h-10 object-contain rounded-lg shadow-sm bg-white/30 p-1" alt="Logo Cliente">` : ''}
+                            <div class="text-[#2D2D2D] text-xs font-bold leading-tight">
+                                ${data.cliente.nombre || 'Ver Sitio'}<br>
+                                <span class="opacity-60 font-normal text-[9px] group-hover/client:underline">Visitar link</span>
+                            </div>
+                        </a>
+                    </div>
+                    ` : `
+                    <div class="bg-[#E5C494] p-5 lg:p-8 flex flex-col justify-center gap-2 flex-1 border-l border-white/20 opacity-70 grayscale">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-black/50">CLIENTE</span>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-black/10 rounded-lg flex items-center justify-center text-xs font-bold text-black/40">?</div>
+                            <span class="text-[#2D2D2D] text-xs font-bold">Proyecto Propio</span>
+                        </div>
+                    </div>
+                    `}
                 </div>
-                <!-- Comments list (to be filled by JS) -->
-                <div id="comments-list-${postId}" class="space-y-4">
-                     <p class="text-xs text-gray-400 italic">Cargando...</p>
+            </div>
+
+            <!-- Media Slider Column (Right) -->
+            <div class="post-media-column group relative flex flex-col bg-[#111] min-h-[400px] lg:min-h-[600px] lg:h-full overflow-hidden" id="slider-${postId}">
+                <div class="main-media-display relative flex-grow w-full flex items-center justify-center bg-black overflow-hidden" id="media-viewport-${postId}">
+                    <!-- Main media content -->
                 </div>
+                
+                <!-- Nav Buttons (Inset) dark translucent style -->
+                <button class="absolute top-1/2 left-4 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md text-white border border-white/10 transition-all opacity-0 group-hover:opacity-100 shadow-md slider-nav-btn slider-nav-prev" id="prev-${postId}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button class="absolute top-1/2 right-4 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md text-white border border-white/10 transition-all opacity-0 group-hover:opacity-100 shadow-md slider-nav-btn slider-nav-next" id="next-${postId}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+                </button>
+
+                <!-- Thumbnails (Mockup Style: Flat blocks filling 100% width) -->
+                <div class="thumbnail-strip flex overflow-hidden bg-[#111] border-t border-[#111] shrink-0 h-28 lg:h-36 relative z-10 w-full" id="thumbs-${postId}">
+                    <!-- Thumbnails go here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Interaction Bar (Integrated Mockup style) -->
+        <div class="w-full bg-[#EEEEEE] px-4 py-3 border-t border-gray-200">
+            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 max-w-7xl mx-auto w-full">
+                <!-- Left: White Pill with Action Buttons -->
+                <div class="flex items-center gap-4 bg-white rounded-full px-5 py-2.5 shadow-sm border border-gray-100">
+                    <button class="flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-red-500 transition-colors like-btn" id="like-${postId}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        <span>LIKE</span>
+                        <span id="likes-count-${postId}" class="text-gray-400 font-normal ml-0.5">${data.likes > 0 ? `(${data.likes})` : ''}</span>
+                    </button>
+                    
+                    <div class="w-px h-5 bg-gray-200"></div>
+                    
+                    <button class="text-gray-500 hover:text-gray-900 transition-colors share-btn" id="share-${postId}">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8l4-4-4-4v3H6C2.686 3 0 5.686 0 9v6h2V9c0-2.209 1.791-4 4-4h9v3z"/></svg>
+                    </button>
+                    
+                    <div class="w-px h-5 bg-gray-200"></div>
+                    
+                    <button class="flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors comment-toggle-btn" id="comment-toggle-${postId}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 12.81 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        <span>COMMENTS</span>
+                        <svg class="w-3 h-3 ml-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                </div>
+
+                <!-- Right: Inputs and Avatar -->
+                <div class="flex items-center gap-3 w-full lg:w-auto flex-grow flex-wrap lg:flex-nowrap">
+                    <div class="w-9 h-9 rounded-full bg-[#E1F5FE] text-[#03A9F4] flex items-center justify-center font-bold text-sm shrink-0">Tu</div>
+                    <input type="text" id="comment-name-${postId}" class="bg-white rounded-full px-4 py-2 border border-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 shadow-sm w-32 placeholder:text-gray-400" placeholder="Tu nombre">
+                    <input type="text" id="comment-text-${postId}" class="bg-white rounded-full px-5 py-2 border border-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 shadow-sm flex-grow placeholder:text-gray-400" placeholder="Escribe un comentario amable">
+                    <button class="text-gray-500 hover:text-[#03A9F4] transition-colors p-2 shrink-0 submit-comment-btn" id="send-comment-${postId}">
+                        <svg class="w-6 h-6 transform rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Collapsible Comments List -->
+        <div id="comments-section-${postId}" class="hidden w-full bg-white border-t border-gray-100 p-6">
+            <div id="comments-list-${postId}" class="space-y-4 max-h-60 overflow-y-auto custom-scrollbar">
+                <p class="text-xs text-gray-400 italic text-center py-4">Cargando comentarios...</p>
             </div>
         </div>
     `;
 
     article.innerHTML = html;
+    
+    // Initialize logic
+    setTimeout(() => {
+        initializePostInteractions(article, postId, data, categoryPath);
+        initializeSlider(postId, data);
+    }, 0);
 
-    // EVENT LISTENERS
-    
-    // Like logic
-    const likeBtn = article.querySelector('.like-btn');
-    const likeCountSpan = article.querySelector('.like-count');
-    
-    if (!hasLiked) {
-        likeBtn.addEventListener('click', async () => {
-             // Disable immediately to prevent double clicks
-             likeBtn.disabled = true;
-             likeBtn.classList.remove('text-gray-500', 'bg-gray-50', 'hover:bg-red-50', 'hover:text-red-500');
-             likeBtn.classList.add('text-red-500', 'bg-red-50');
-             likeBtn.querySelector('svg').classList.replace('fill-none', 'fill-current');
-             likeBtn.querySelector('svg').classList.remove('stroke-2');
-             
-             const currentLikes = parseInt(likeCountSpan.textContent);
-             likeCountSpan.textContent = currentLikes + 1;
-             
-             localStorage.setItem(likesKey, 'true');
-             
-             try {
-                 await updateDoc(doc(db, "posts", postId), {
-                     likes: increment(1)
-                 });
-             } catch (error) {
-                 console.error("Error giving like", error);
-             }
-        }, { once: true });
+    return article;
+}
+
+function initializePostInteractions(article, postId, data, categoryPath) {
+    const likesKey = `liked_${postId}`;
+    const hasLiked = localStorage.getItem(likesKey) === 'true';
+
+    // Ver más logic
+    const contentContainer = article.querySelector(`#content-container-${postId}`);
+    const verMasBtn = article.querySelector(`#ver-mas-${postId}`);
+    const fade = article.querySelector(`#content-fade-${postId}`);
+
+    if (contentContainer.scrollHeight <= 400) {
+        verMasBtn.style.display = 'none';
+        fade.style.display = 'none';
     }
 
-    // Share logic
-    const shareBtn = article.querySelector('.share-btn');
+    verMasBtn.addEventListener('click', () => {
+        contentContainer.classList.toggle('is-expanded');
+        const icon = verMasBtn.querySelector('svg');
+        const text = verMasBtn.querySelector('span');
+        
+        if (contentContainer.classList.contains('is-expanded')) {
+            icon.style.transform = 'rotate(180deg)';
+            text.textContent = 'Ver menos detalles';
+        } else {
+            icon.style.transform = 'rotate(0deg)';
+            text.textContent = 'Ver más detalle';
+            contentContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    });
+
+    // Like logic
+    const likeBtn = article.querySelector(`#like-${postId}`);
+    const likeCountSpan = article.querySelector(`#likes-count-${postId}`);
+    
+    if (hasLiked) {
+        likeBtn.classList.add('is-active');
+        likeBtn.querySelector('svg').style.fill = 'currentColor';
+    }
+
+    likeBtn.addEventListener('click', async () => {
+         if (localStorage.getItem(likesKey) === 'true') return;
+
+         likeBtn.disabled = true;
+         likeBtn.classList.add('is-active');
+         likeBtn.querySelector('svg').style.fill = 'currentColor';
+         
+         const currentLikes = data.likes || 0;
+         likeCountSpan.textContent = `(${currentLikes + 1})`;
+         likeCountSpan.style.display = 'inline';
+         
+         localStorage.setItem(likesKey, 'true');
+         
+         try {
+             await updateDoc(doc(db, "posts", postId), {
+                 likes: increment(1)
+             });
+         } catch (error) {
+             console.error("Error giving like", error);
+         }
+    });
+
+    // Share logic & Client-Side SEO Injection on direct link Match
+    if (window.location.hash === `#post-${postId}`) {
+        document.title = `${data.titulo} | WebBumpo`;
+        document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(e => e.remove());
+        
+        const fallbackImg = data.imagenes && data.imagenes.length > 0 ? data.imagenes[0] : 'https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png';
+        const finalSeoImage = data.seoThumbnail || fallbackImg;
+        
+        const ogTags = [
+            { property: 'og:title', content: data.titulo },
+            { property: 'og:description', content: 'Mira esta publicación interesante' },
+            { property: 'og:image', content: finalSeoImage },
+            { property: 'og:url', content: window.location.href },
+            { property: 'og:type', content: 'article' },
+            { name: 'twitter:card', content: 'summary_large_image' },
+            { name: 'twitter:title', content: data.titulo },
+            { name: 'twitter:image', content: finalSeoImage }
+        ];
+        
+        ogTags.forEach(tag => {
+            const meta = document.createElement('meta');
+            if (tag.property) meta.setAttribute('property', tag.property);
+            if (tag.name) meta.setAttribute('name', tag.name);
+            meta.setAttribute('content', tag.content);
+            document.head.appendChild(meta);
+        });
+    }
+
+    const shareBtn = article.querySelector(`#share-${postId}`);
     shareBtn.addEventListener('click', () => {
-        const title = shareBtn.getAttribute('data-title');
-        const url = shareBtn.getAttribute('data-url');
+        const baseUrl = '/hojadevida/';
+        const urlCompartir = `${window.location.origin}${baseUrl}pages/servicios/${categoryPath}.html#post-${postId}`;
         
         if (navigator.share) {
             navigator.share({
-                title: title,
-                text: 'Mira esta publicación interesante',
-                url: url
+                title: data.titulo,
+                text: 'Mira esta publicación interesante de WebBumpo',
+                url: urlCompartir
             }).catch(console.error);
         } else {
-            // Fallback for desktop/unsupported browsers
-            navigator.clipboard.writeText(url);
-            const originalText = shareBtn.innerHTML;
-            shareBtn.innerHTML = '<span class="text-green-600">¡Enlace copiado!</span>';
-            setTimeout(() => shareBtn.innerHTML = originalText, 2000);
+            navigator.clipboard.writeText(urlCompartir);
+            alert('Enlace copiado al portapapeles');
         }
     });
 
     // Toggle comments
-    const commentBtn = article.querySelector('.comment-btn');
-    const commentsDrawer = article.querySelector(`#comments-drawer-${postId}`);
+    const commentBtn = article.querySelector(`#comment-toggle-${postId}`);
+    const commentsSection = article.querySelector(`#comments-section-${postId}`);
     commentBtn.addEventListener('click', () => {
-        commentsDrawer.classList.toggle('hidden');
-        if (!commentsDrawer.classList.contains('hidden')) {
-            // Here we will trigger loading comments if not loaded yet
+        commentsSection.classList.toggle('hidden');
+        if (!commentsSection.classList.contains('hidden')) {
             import('./comments-system.js').then(module => {
                 module.loadCommentsForPost(postId);
             });
         }
     });
 
-    // Add comment listener
-    const submitCommentBtn = article.querySelector('.submit-comment-btn');
+    // Add comment listener (Inline Bar)
+    const submitCommentBtn = article.querySelector(`#send-comment-${postId}`);
     submitCommentBtn.addEventListener('click', () => {
          const nameInput = article.querySelector(`#comment-name-${postId}`).value.trim();
          const textInput = article.querySelector(`#comment-text-${postId}`).value.trim();
          if (nameInput && textInput) {
-             submitCommentBtn.textContent = '...';
              submitCommentBtn.disabled = true;
              import('./comments-system.js').then(module => {
                 module.addComment(postId, nameInput, textInput).then(() => {
                     article.querySelector(`#comment-text-${postId}`).value = '';
-                    submitCommentBtn.textContent = 'Enviar';
                     submitCommentBtn.disabled = false;
+                    // Refresh comments list if open
+                    if (!commentsSection.classList.contains('hidden')) {
+                        module.loadCommentsForPost(postId);
+                    }
                 });
              });
          } else {
-             alert('Por favor escribe tu nombre y el comentario.');
+             alert('Escribe tu nombre y comentario.');
          }
     });
 
-    return article;
+    // Security: Right click prevention on media
+    const mediaColumn = article.querySelector('.post-media-column');
+    mediaColumn.addEventListener('contextmenu', (e) => e.preventDefault());
 }
 
-// Util para evitar XSS en el texto libre
-function escapeHTML(str) {
-    return str.replace(/[&<>'"]/g, 
-        tag => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            "'": '&#39;',
-            '"': '&quot;'
-        }[tag])
-    );
+async function initializeSlider(postId, data) {
+    const { initSlider } = await import('./media-slider.js');
+    initSlider(postId, data);
 }
