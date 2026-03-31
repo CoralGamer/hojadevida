@@ -298,30 +298,37 @@ function initializePostInteractions(article, postId, data, categoryPath) {
 
     // Share logic & Client-Side SEO Injection on direct link Match
     if (window.location.hash === `#post-${postId}`) {
-        document.title = `${data.titulo} | WebBumpo`;
-        document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(e => e.remove());
-        
+        const fullTitle = `${data.titulo} – Portafolio Web de Jeefry Archila`;
+        document.title = fullTitle;
+
         const fallbackImg = data.imagenes && data.imagenes.length > 0 ? data.imagenes[0] : 'https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png';
         const finalSeoImage = data.seoThumbnail || fallbackImg;
-        
-        const ogTags = [
-            { property: 'og:title', content: data.titulo },
-            { property: 'og:description', content: 'Mira esta publicación interesante' },
-            { property: 'og:image', content: finalSeoImage },
-            { property: 'og:url', content: window.location.href },
-            { property: 'og:type', content: 'article' },
-            { name: 'twitter:card', content: 'summary_large_image' },
-            { name: 'twitter:title', content: data.titulo },
-            { name: 'twitter:image', content: finalSeoImage }
-        ];
-        
-        ogTags.forEach(tag => {
-            const meta = document.createElement('meta');
-            if (tag.property) meta.setAttribute('property', tag.property);
-            if (tag.name) meta.setAttribute('name', tag.name);
-            meta.setAttribute('content', tag.content);
-            document.head.appendChild(meta);
-        });
+
+        // Helper: actualiza tag existente o crea uno nuevo
+        const setMeta = (attr, key, value) => {
+            let el = document.querySelector(`meta[${attr}="${key}"]`);
+            if (!el) { el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); }
+            el.setAttribute('content', value);
+        };
+
+        setMeta('property', 'og:site_name', 'Portafolio Web de Jeefry Archila');
+        setMeta('property', 'og:type',      'article');
+        setMeta('property', 'og:title',     data.titulo);
+        setMeta('property', 'og:description', fullTitle);
+        setMeta('property', 'og:image',     finalSeoImage);
+        setMeta('property', 'og:image:width',  '1200');
+        setMeta('property', 'og:image:height', '630');
+        setMeta('property', 'og:url',       window.location.href);
+        setMeta('name',     'twitter:card',  'summary_large_image');
+        setMeta('name',     'twitter:title', data.titulo);
+        setMeta('name',     'twitter:description', fullTitle);
+        setMeta('name',     'twitter:image', finalSeoImage);
+
+        // Scroll al post automáticamente
+        setTimeout(() => {
+            const el = document.getElementById(`post-${postId}`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 400);
     }
 
     const shareBtn = article.querySelector(`#share-${postId}`);
@@ -332,7 +339,7 @@ function initializePostInteractions(article, postId, data, categoryPath) {
         if (navigator.share) {
             navigator.share({
                 title: data.titulo,
-                text: 'Mira esta publicación interesante de WebBumpo',
+                text: `${data.titulo} – Portafolio Web de Jeefry Archila`,
                 url: urlCompartir
             }).catch(console.error);
         } else {
