@@ -98,7 +98,8 @@ export function createPostElement(postId, data, categoryPath) {
             const iconUrl = tool === 'antigravity' 
                 ? '/hojadevida/src/assets/icons/antigravity-color.svg' 
                 : `https://cdn.simpleicons.org/${slug}`; // Not white hex, but original
-            toolsHtml += `<img src="${iconUrl}" class="tool-icon" data-tooltip="${tool.charAt(0).toUpperCase() + tool.slice(1)}" alt="${tool}">`;
+            const toolName = tool.charAt(0).toUpperCase() + tool.slice(1);
+            toolsHtml += `<img src="${iconUrl}" class="tool-icon" data-tooltip="${toolName}" title="${toolName}" alt="${toolName}">`;
         });
     }
 
@@ -129,10 +130,12 @@ export function createPostElement(postId, data, categoryPath) {
 
                 <!-- Tools & Client Bar (Bicolor) - Ahora sin spacing, full width -->
                 <div class="flex w-full items-stretch mt-auto min-h-[100px]">
-                    <div class="bg-[#F5A623] p-5 lg:p-8 flex flex-col justify-center gap-2 flex-[1.2] lg:flex-[1.5]">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-black/50">TOOLS USADAS</span>
-                        <div class="flex flex-wrap gap-2">
-                            ${toolsHtml}
+                    <div class="bg-[#F5A623] p-5 lg:p-8 flex flex-col justify-center gap-2 flex-[1.2] lg:flex-[1.5] min-w-0 overflow-hidden">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-black/50 shrink-0">TOOLS USADAS</span>
+                        <div class="w-full overflow-hidden relative" id="tools-container-${postId}">
+                            <div class="flex gap-2 w-max" id="tools-track-${postId}">
+                                ${toolsHtml}
+                            </div>
                         </div>
                     </div>
                     ${hasClient ? `
@@ -239,6 +242,35 @@ export function createPostElement(postId, data, categoryPath) {
 function initializePostInteractions(article, postId, data, categoryPath) {
     const likesKey = `liked_${postId}`;
     const hasLiked = localStorage.getItem(likesKey) === 'true';
+
+    // Tools marquee logic
+    const track = article.querySelector(`#tools-track-${postId}`);
+    const toolsContainer = article.querySelector(`#tools-container-${postId}`);
+    if (track && toolsContainer && data.herramientas && data.herramientas.length > 0) {
+        if (track.scrollWidth > toolsContainer.clientWidth) {
+            const originalWidth = track.scrollWidth;
+            const gap = 8; // gap-2 is 0.5rem (8px)
+            track.innerHTML += track.innerHTML; // Duplicate tools for seamless loop
+            
+            const distance = originalWidth + gap;
+            const duration = data.herramientas.length * 2000; // 2s per tool
+            
+            const animation = track.animate([
+                { transform: 'translateX(0px)' },
+                { transform: `translateX(-${distance}px)` }
+            ], {
+                duration: duration,
+                iterations: Infinity
+            });
+            
+            track.addEventListener('mouseenter', () => animation.pause());
+            track.addEventListener('mouseleave', () => animation.play());
+            
+            // Mask for fading edges in tools container
+            toolsContainer.style.maskImage = 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)';
+            toolsContainer.style.webkitMaskImage = 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)';
+        }
+    }
 
     // Ver más logic
     const contentContainer = article.querySelector(`#content-container-${postId}`);
