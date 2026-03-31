@@ -333,8 +333,10 @@ function initializePostInteractions(article, postId, data, categoryPath) {
 
     const shareBtn = article.querySelector(`#share-${postId}`);
     shareBtn.addEventListener('click', () => {
-        const baseUrl = '/hojadevida/';
-        const urlCompartir = `${window.location.origin}${baseUrl}pages/servicios/${categoryPath}.html#post-${postId}`;
+        // URL del Cloudflare Worker → genera OG tags correctas para crawlers
+        // Humanos son redirigidos automáticamente al post real
+        const WORKER_URL = 'https://jeefry-share.jeefryarchila.workers.dev';
+        const urlCompartir = `${WORKER_URL}/post/${postId}`;
         
         if (navigator.share) {
             navigator.share({

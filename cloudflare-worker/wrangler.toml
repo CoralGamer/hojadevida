@@ -1,0 +1,6 @@
+name = "jeefry-share"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Worker gratuito: 100,000 requests/día
+# URL resultante: https://jeefry-share.TU_SUBDOMINIO.workers.dev/post/{postId}
