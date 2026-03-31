@@ -11,7 +11,7 @@ import { collection, query, where, orderBy, getDocs, doc, updateDoc, increment }
 export async function renderPostsByCategory(category, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
-    
+
     container.innerHTML = `<div class="col-span-full py-12 text-center text-gray-500 font-medium animate-pulse">Cargando publicaciones...</div>`;
 
     try {
@@ -20,9 +20,9 @@ export async function renderPostsByCategory(category, containerId) {
             where("categorias", "array-contains", category),
             orderBy("fechaCreacion", "desc")
         );
-        
+
         const querySnapshot = await getDocs(q);
-        
+
         if (querySnapshot.empty) {
             container.innerHTML = `
                 <div class="col-span-full py-16 text-center">
@@ -84,7 +84,7 @@ export function createPostElement(postId, data, categoryPath) {
         'vscode': 'visualstudiocode',
         'trello': 'trello',
         'notion': 'notion',
-        'google-workspace': 'googleworkspace',
+        'google-workspace': 'google-workspace',
         'office365': 'microsoftoffice'
     };
 
@@ -95,9 +95,34 @@ export function createPostElement(postId, data, categoryPath) {
     if (data.herramientas && data.herramientas.length > 0) {
         data.herramientas.forEach(tool => {
             const slug = toolIcons[tool] || tool;
-            const iconUrl = tool === 'antigravity' 
-                ? '/hojadevida/src/assets/icons/antigravity-color.svg' 
-                : `https://cdn.simpleicons.org/${slug}`; // Not white hex, but original
+            let iconUrl = '';
+
+            // Definir íconos locales (manualmente guardados en /assets/icons/)
+            const customIcons = {
+                'google-workspace': '/hojadevida/assets/icons/google-workspace.svg',
+                'office365': '/hojadevida/assets/icons/office-365-icon.svg',
+                'openai': '/hojadevida/assets/icons/openai.svg',
+                'vscode': '/hojadevida/assets/icons/vscode.svg',
+                'antigravity': '/hojadevida/assets/icons/antigravity-color.svg',
+                '3dmax': '/hojadevida/assets/icons/3ds-max-full.svg',
+                'zmodeler': '/hojadevida/assets/icons/zmodeler.svg',
+                'substance-3d': '/hojadevida/assets/icons/substance-painter.svg',
+                'photoshop': '/hojadevida/assets/icons/adobe-photoshop-icon.svg',
+                'illustrator': '/hojadevida/assets/icons/adobe-illustrator-icon.svg',
+                'premiere': '/hojadevida/assets/icons/adobe-premiere-pro-icon.svg',
+                'after-effects': '/hojadevida/assets/icons/adobe-after-effects-icon.svg',
+                'paintool-sai': '/hojadevida/assets/icons/paintoolsai.svg',
+                'sai': '/hojadevida/assets/icons/paintoolsai.svg'
+            };
+
+            // Si la herramienta está en nuestra lista personalizada, usamos el archivo local.
+            // Si no está, intentamos descargarla desde simpleicons.org
+            if (customIcons[tool]) {
+                iconUrl = customIcons[tool];
+            } else {
+                iconUrl = `https://cdn.simpleicons.org/${slug}`;
+            }
+
             const toolName = tool.charAt(0).toUpperCase() + tool.slice(1);
             toolsHtml += `<img src="${iconUrl}" class="tool-icon" data-tooltip="${toolName}" title="${toolName}" alt="${toolName}">`;
         });
@@ -112,9 +137,9 @@ export function createPostElement(postId, data, categoryPath) {
             <div class="post-info-column flex flex-col h-full bg-white relative">
                 <!-- Padding interior para el contenido -->
                 <div class="p-8 lg:p-12 flex-grow flex flex-col">
-                    <span class="text-[10px] font-black text-[#FF7A00] uppercase tracking-[0.2em] mb-4 block">${dateStr}</span>
-                    <h2 class="text-3xl lg:text-4xl font-black text-gray-900 mb-8 leading-tight tracking-tight">${data.titulo}</h2>
-                    
+                    <h2 class="text-3xl lg:text-4xl font-black text-gray-900 mb-4 leading-tight tracking-tight">${data.titulo}</h2>
+                    <span class="text-[10px] font-black text-[#FF7A00] uppercase tracking-[0.2em] mb-8 block">${dateStr}</span>
+
                     <div class="post-content-container relative flex-grow" id="content-container-${postId}">
                         <div class="prose max-w-none text-[#4A4A4A]">
                             ${cleanHtml}
@@ -229,7 +254,7 @@ export function createPostElement(postId, data, categoryPath) {
     `;
 
     article.innerHTML = html;
-    
+
     // Initialize logic
     setTimeout(() => {
         initializePostInteractions(article, postId, data, categoryPath);
@@ -251,10 +276,10 @@ function initializePostInteractions(article, postId, data, categoryPath) {
             const originalWidth = track.scrollWidth;
             const gap = 8; // gap-2 is 0.5rem (8px)
             track.innerHTML += track.innerHTML; // Duplicate tools for seamless loop
-            
+
             const distance = originalWidth + gap;
             const duration = data.herramientas.length * 2000; // 2s per tool
-            
+
             const animation = track.animate([
                 { transform: 'translateX(0px)' },
                 { transform: `translateX(-${distance}px)` }
@@ -262,10 +287,10 @@ function initializePostInteractions(article, postId, data, categoryPath) {
                 duration: duration,
                 iterations: Infinity
             });
-            
+
             track.addEventListener('mouseenter', () => animation.pause());
             track.addEventListener('mouseleave', () => animation.play());
-            
+
             // Mask for fading edges in tools container
             toolsContainer.style.maskImage = 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)';
             toolsContainer.style.webkitMaskImage = 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)';
@@ -286,7 +311,7 @@ function initializePostInteractions(article, postId, data, categoryPath) {
         contentContainer.classList.toggle('is-expanded');
         const icon = verMasBtn.querySelector('svg');
         const text = verMasBtn.querySelector('span');
-        
+
         if (contentContainer.classList.contains('is-expanded')) {
             icon.style.transform = 'rotate(180deg)';
             text.textContent = 'Ver menos detalles';
@@ -300,32 +325,32 @@ function initializePostInteractions(article, postId, data, categoryPath) {
     // Like logic
     const likeBtn = article.querySelector(`#like-${postId}`);
     const likeCountSpan = article.querySelector(`#likes-count-${postId}`);
-    
+
     if (hasLiked) {
         likeBtn.classList.add('is-active');
         likeBtn.querySelector('svg').style.fill = 'currentColor';
     }
 
     likeBtn.addEventListener('click', async () => {
-         if (localStorage.getItem(likesKey) === 'true') return;
+        if (localStorage.getItem(likesKey) === 'true') return;
 
-         likeBtn.disabled = true;
-         likeBtn.classList.add('is-active');
-         likeBtn.querySelector('svg').style.fill = 'currentColor';
-         
-         const currentLikes = data.likes || 0;
-         likeCountSpan.textContent = `(${currentLikes + 1})`;
-         likeCountSpan.style.display = 'inline';
-         
-         localStorage.setItem(likesKey, 'true');
-         
-         try {
-             await updateDoc(doc(db, "posts", postId), {
-                 likes: increment(1)
-             });
-         } catch (error) {
-             console.error("Error giving like", error);
-         }
+        likeBtn.disabled = true;
+        likeBtn.classList.add('is-active');
+        likeBtn.querySelector('svg').style.fill = 'currentColor';
+
+        const currentLikes = data.likes || 0;
+        likeCountSpan.textContent = `(${currentLikes + 1})`;
+        likeCountSpan.style.display = 'inline';
+
+        localStorage.setItem(likesKey, 'true');
+
+        try {
+            await updateDoc(doc(db, "posts", postId), {
+                likes: increment(1)
+            });
+        } catch (error) {
+            console.error("Error giving like", error);
+        }
     });
 
     // Share logic & Client-Side SEO Injection on direct link Match
@@ -344,17 +369,17 @@ function initializePostInteractions(article, postId, data, categoryPath) {
         };
 
         setMeta('property', 'og:site_name', 'Portafolio Web de Jeefry Archila');
-        setMeta('property', 'og:type',      'article');
-        setMeta('property', 'og:title',     data.titulo);
+        setMeta('property', 'og:type', 'article');
+        setMeta('property', 'og:title', data.titulo);
         setMeta('property', 'og:description', fullTitle);
-        setMeta('property', 'og:image',     finalSeoImage);
-        setMeta('property', 'og:image:width',  '1200');
+        setMeta('property', 'og:image', finalSeoImage);
+        setMeta('property', 'og:image:width', '1200');
         setMeta('property', 'og:image:height', '630');
-        setMeta('property', 'og:url',       window.location.href);
-        setMeta('name',     'twitter:card',  'summary_large_image');
-        setMeta('name',     'twitter:title', data.titulo);
-        setMeta('name',     'twitter:description', fullTitle);
-        setMeta('name',     'twitter:image', finalSeoImage);
+        setMeta('property', 'og:url', window.location.href);
+        setMeta('name', 'twitter:card', 'summary_large_image');
+        setMeta('name', 'twitter:title', data.titulo);
+        setMeta('name', 'twitter:description', fullTitle);
+        setMeta('name', 'twitter:image', finalSeoImage);
 
         // Scroll al post automáticamente
         setTimeout(() => {
@@ -369,7 +394,7 @@ function initializePostInteractions(article, postId, data, categoryPath) {
         // Humanos son redirigidos automáticamente al post real
         const WORKER_URL = 'https://jeefry-share.jeefryarchila.workers.dev';
         const urlCompartir = `${WORKER_URL}/post/${postId}`;
-        
+
         if (navigator.share) {
             navigator.share({
                 title: data.titulo,
@@ -397,11 +422,11 @@ function initializePostInteractions(article, postId, data, categoryPath) {
     // Add comment listener (Inline Bar)
     const submitCommentBtn = article.querySelector(`#send-comment-${postId}`);
     submitCommentBtn.addEventListener('click', () => {
-         const nameInput = article.querySelector(`#comment-name-${postId}`).value.trim();
-         const textInput = article.querySelector(`#comment-text-${postId}`).value.trim();
-         if (nameInput && textInput) {
-             submitCommentBtn.disabled = true;
-             import('./comments-system.js').then(module => {
+        const nameInput = article.querySelector(`#comment-name-${postId}`).value.trim();
+        const textInput = article.querySelector(`#comment-text-${postId}`).value.trim();
+        if (nameInput && textInput) {
+            submitCommentBtn.disabled = true;
+            import('./comments-system.js').then(module => {
                 module.addComment(postId, nameInput, textInput).then(() => {
                     article.querySelector(`#comment-text-${postId}`).value = '';
                     submitCommentBtn.disabled = false;
@@ -410,10 +435,10 @@ function initializePostInteractions(article, postId, data, categoryPath) {
                         module.loadCommentsForPost(postId);
                     }
                 });
-             });
-         } else {
-             alert('Escribe tu nombre y comentario.');
-         }
+            });
+        } else {
+            alert('Escribe tu nombre y comentario.');
+        }
     });
 
     // Security: Right click prevention on media
