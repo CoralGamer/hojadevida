@@ -4,47 +4,49 @@
     <link rel="icon" type="image/png" href="/hojadevida/assets/icons/LogoPNG.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Roblox Studios – Jeefry Nicolas Archila</title>
+    <title>Producción Multimedia – Jeefry Nicolas Archila</title>
     <!-- Open Graph / Social Preview (estático para crawlers) -->
     <meta property="og:site_name" content="Portafolio Web de Jeefry Archila" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Roblox Studios – Jeefry Nicolas Archila" />
+    <meta property="og:title" content="Producción Multimedia – Jeefry Nicolas Archila" />
     <meta property="og:description" content="Portafolio profesional de Jeefry Nicolas Archila – Proyectos, experiencias y publicaciones sobre tecnología, 3D, IA y más." />
     <meta property="og:image" content="https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
-    <meta property="og:url" content="https://coralgamer.github.io/hojadevida/pages/servicios/roblox.html" />
+    <meta property="og:url" content="https://coralgamer.github.io/hojadevida/pages/servicios/produccion-multimedia.html" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Roblox Studios – Jeefry Nicolas Archila" />
+    <meta name="twitter:title" content="Producción Multimedia – Jeefry Nicolas Archila" />
     <meta name="twitter:description" content="Portafolio profesional de Jeefry Nicolas Archila – Proyectos, experiencias y publicaciones sobre tecnología, 3D, IA y más." />
     <meta name="twitter:image" content="https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png" />
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../src/style.css">
 </head>
 <body class="bg-[#F8F9FA] text-[#1F1F1F]">
     <nav class="bg-white border-b border-gray-100 py-4 mb-8">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <h1 class="font-bold text-xl text-gray-800">Roblox Studios</h1>
-            <a href="index.html" class="text-sm font-semibold text-[#1A73E8] hover:underline flex items-center gap-1">
+            <h1 class="font-bold text-xl text-gray-800">Producción Multimedia</h1>
+            <a href="/hojadevida/pages/servicios/index.html" class="text-sm font-semibold text-[#1A73E8] hover:underline flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Volver a Servicios
             </a>
         </div>
     </nav>
     <header class="max-w-7xl mx-auto px-4 mb-12 text-center">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-red-50 text-red-600 mb-6 shadow-sm">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-pink-50 text-pink-600 mb-6 shadow-sm">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
         </div>
         <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Blog & Novedades</h2>
-        <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto">Experiencias y secretos de desarrollo LUA para comunidades de millones de usuarios en Roblox.</p>
+        <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto">Edición de video, modelado 3D, animación y diseño integral para marcas comerciales y digitales.</p>
     </header>
     <main class="max-w-7xl mx-auto px-4 pb-24">
         <div id="postsContainer" class="space-y-12"></div>
     </main>
     <script type="module">
-        import { renderPostsByCategory } from '../../js/blog-renderer.js';
+        import { renderPostsByCategory } from '../../src/js/blog-renderer.js';
         document.addEventListener('DOMContentLoaded', () => {
-             renderPostsByCategory('roblox', 'postsContainer');
+             renderPostsByCategory('produccion-multimedia', 'postsContainer');
         });
     </script>
 </body>
 </html>
+
+

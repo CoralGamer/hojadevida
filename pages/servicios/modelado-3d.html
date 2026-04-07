@@ -4,47 +4,49 @@
     <link rel="icon" type="image/png" href="/hojadevida/assets/icons/LogoPNG.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apicultura – Jeefry Nicolas Archila</title>
+    <title>Modelado 3D – Jeefry Nicolas Archila</title>
     <!-- Open Graph / Social Preview (estático para crawlers) -->
     <meta property="og:site_name" content="Portafolio Web de Jeefry Archila" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Apicultura – Jeefry Nicolas Archila" />
+    <meta property="og:title" content="Modelado 3D – Jeefry Nicolas Archila" />
     <meta property="og:description" content="Portafolio profesional de Jeefry Nicolas Archila – Proyectos, experiencias y publicaciones sobre tecnología, 3D, IA y más." />
     <meta property="og:image" content="https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
-    <meta property="og:url" content="https://coralgamer.github.io/hojadevida/pages/servicios/apicultura.html" />
+    <meta property="og:url" content="https://coralgamer.github.io/hojadevida/pages/servicios/modelado-3d.html" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Apicultura – Jeefry Nicolas Archila" />
+    <meta name="twitter:title" content="Modelado 3D – Jeefry Nicolas Archila" />
     <meta name="twitter:description" content="Portafolio profesional de Jeefry Nicolas Archila – Proyectos, experiencias y publicaciones sobre tecnología, 3D, IA y más." />
     <meta name="twitter:image" content="https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png" />
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../src/style.css">
 </head>
 <body class="bg-[#F8F9FA] text-[#1F1F1F]">
     <nav class="bg-white border-b border-gray-100 py-4 mb-8">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <h1 class="font-bold text-xl text-gray-800">Apicultura Oromiel</h1>
-            <a href="index.html" class="text-sm font-semibold text-[#1A73E8] hover:underline flex items-center gap-1">
+            <h1 class="font-bold text-xl text-gray-800">Modelado 3D</h1>
+            <a href="/hojadevida/pages/servicios/index.html" class="text-sm font-semibold text-[#1A73E8] hover:underline flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Volver a Servicios
             </a>
         </div>
     </nav>
     <header class="max-w-7xl mx-auto px-4 mb-12 text-center">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-yellow-50 text-yellow-600 mb-6 shadow-sm">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-purple-50 text-purple-600 mb-6 shadow-sm">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
         </div>
-        <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Blog & Novedades</h2>
-        <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto">Producción sustentable, conservación de especies y mi contribución al ecosistema a través de Oromiel.</p>
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Blog & Obras</h2>
+        <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto">Visita la galería de modelos, texturizado PBR y mi flujo de trabajo para assets digitales.</p>
     </header>
     <main class="max-w-7xl mx-auto px-4 pb-24">
         <div id="postsContainer" class="space-y-12"></div>
     </main>
     <script type="module">
-        import { renderPostsByCategory } from '../../js/blog-renderer.js';
+        import { renderPostsByCategory } from '../../src/js/blog-renderer.js';
         document.addEventListener('DOMContentLoaded', () => {
-             renderPostsByCategory('apicultura', 'postsContainer');
+             renderPostsByCategory('modelado-3d', 'postsContainer');
         });
     </script>
 </body>
 </html>
+
+

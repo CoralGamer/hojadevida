@@ -4,47 +4,49 @@
     <link rel="icon" type="image/png" href="/hojadevida/assets/icons/LogoPNG.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VR Experiences – Jeefry Nicolas Archila</title>
+    <title>IA & Automation – Jeefry Nicolas Archila</title>
     <!-- Open Graph / Social Preview (estático para crawlers) -->
     <meta property="og:site_name" content="Portafolio Web de Jeefry Archila" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="VR Experiences – Jeefry Nicolas Archila" />
+    <meta property="og:title" content="IA & Automation – Jeefry Nicolas Archila" />
     <meta property="og:description" content="Portafolio profesional de Jeefry Nicolas Archila – Proyectos, experiencias y publicaciones sobre tecnología, 3D, IA y más." />
     <meta property="og:image" content="https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
-    <meta property="og:url" content="https://coralgamer.github.io/hojadevida/pages/servicios/vr-experiences.html" />
+    <meta property="og:url" content="https://coralgamer.github.io/hojadevida/pages/servicios/ia-automation.html" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="VR Experiences – Jeefry Nicolas Archila" />
+    <meta name="twitter:title" content="IA & Automation – Jeefry Nicolas Archila" />
     <meta name="twitter:description" content="Portafolio profesional de Jeefry Nicolas Archila – Proyectos, experiencias y publicaciones sobre tecnología, 3D, IA y más." />
     <meta name="twitter:image" content="https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png" />
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../src/style.css">
 </head>
 <body class="bg-[#F8F9FA] text-[#1F1F1F]">
     <nav class="bg-white border-b border-gray-100 py-4 mb-8">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <h1 class="font-bold text-xl text-gray-800">VR Experiences</h1>
-            <a href="index.html" class="text-sm font-semibold text-[#1A73E8] hover:underline flex items-center gap-1">
+            <h1 class="font-bold text-xl text-gray-800">IA & Automation</h1>
+            <a href="/hojadevida/pages/servicios/index.html" class="text-sm font-semibold text-[#1A73E8] hover:underline flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Volver a Servicios
             </a>
         </div>
     </nav>
     <header class="max-w-7xl mx-auto px-4 mb-12 text-center">
-        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-cyan-50 text-cyan-600 mb-6 shadow-sm">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-indigo-50 text-indigo-600 mb-6 shadow-sm">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
         </div>
         <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Blog & Novedades</h2>
-        <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto">Casos de innovación y desarrollos inmersivos, Metaversos y VR corporativa.</p>
+        <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto">Implementación de flujos de trabajo con n8n, integración de modelos LLM y automatización inteligente.</p>
     </header>
     <main class="max-w-7xl mx-auto px-4 pb-24">
         <div id="postsContainer" class="space-y-12"></div>
     </main>
     <script type="module">
-        import { renderPostsByCategory } from '../../js/blog-renderer.js';
+        import { renderPostsByCategory } from '../../src/js/blog-renderer.js';
         document.addEventListener('DOMContentLoaded', () => {
-             renderPostsByCategory('vr-experiences', 'postsContainer');
+             renderPostsByCategory('ia-automation', 'postsContainer');
         });
     </script>
 </body>
 </html>
+
+

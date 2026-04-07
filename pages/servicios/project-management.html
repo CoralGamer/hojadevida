@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Portafolio profesional de Jeefry Nicolas Archila – Proyectos, experiencias y publicaciones sobre tecnología, 3D, IA y más." />
     <meta name="twitter:image" content="https://coralgamer.github.io/hojadevida/assets/icons/LogoPNG.png" />
     <!-- Incluimos Tailwind CSS -->
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../src/style.css">
 </head>
 
 <body class="bg-[#F8F9FA] text-[#1F1F1F]">
@@ -29,7 +29,7 @@
     <nav class="bg-white border-b border-gray-100 py-4 mb-8">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <h1 class="font-bold text-xl text-gray-800">Project Management</h1>
-            <a href="index.html" class="text-sm font-semibold text-[#1A73E8] hover:underline flex items-center gap-1">
+            <a href="/hojadevida/pages/servicios/index.html" class="text-sm font-semibold text-[#1A73E8] hover:underline flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Volver a Servicios
             </a>
@@ -55,7 +55,7 @@
     <!-- Script principal para inyectar posts -->
     <script type="module">
         // Importamos la función central del "backend falso"
-        import { renderPostsByCategory } from '../../js/blog-renderer.js';
+        import { renderPostsByCategory } from '../../src/js/blog-renderer.js';
 
         // Ejecutamos la carga para Tí
         // Nota el 'project-management' coincide con tu valor puesto en el select del admin.html
@@ -65,3 +65,5 @@
     </script>
 </body>
 </html>
+
+
