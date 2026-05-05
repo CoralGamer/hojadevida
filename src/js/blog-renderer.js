@@ -4,6 +4,23 @@ import { db } from '../firebase-config.js';
 import { collection, query, where, orderBy, getDocs, doc, updateDoc, increment } from "firebase/firestore";
 
 /**
+ * Configuración de categorías para mapeo de nombres y URLs
+ */
+const categoryConfig = {
+    'game-development': { name: 'Game Development', url: '/hojadevida/pages/servicios/game-development.html', color: '#6366F1' },
+    'web-fullstack': { name: 'Web Fullstack', url: '/hojadevida/pages/servicios/web-fullstack.html', color: '#1A73E8' },
+    'vr-experiences': { name: 'VR Experiences', url: '/hojadevida/pages/servicios/vr-experiences.html', color: '#06B6D4' },
+    'roblox': { name: 'Roblox Studios', url: '/hojadevida/pages/servicios/roblox.html', color: '#EF4444' },
+    'modelado-3d': { name: 'Modelado 3D', url: '/hojadevida/pages/servicios/modelado-3d.html', color: '#A855F7' },
+    'ia-automation': { name: 'IA & Automation', url: '/hojadevida/pages/servicios/ia-automation.html', color: '#F59E0B' },
+    'produccion-multimedia': { name: 'Producción Multimedia', url: '/hojadevida/pages/servicios/produccion-multimedia.html', color: '#EC4899' },
+    'project-management': { name: 'Project Management', url: '/hojadevida/pages/servicios/project-management.html', color: '#3B82F6' },
+    'educacion-digital': { name: 'Educación Digital', url: '/hojadevida/pages/servicios/educacion-digital.html', color: '#10B981' },
+    'soporte-tecnico': { name: 'Soporte Técnico', url: '/hojadevida/pages/servicios/soporte-tecnico.html', color: '#6B7280' },
+    'apicultura': { name: 'Apicultura', url: '/hojadevida/pages/servicios/apicultura.html', color: '#D97706' }
+};
+
+/**
  * Función para renderizar posts de una categoría específica en un contenedor dado.
  * @param {string} category - ID de la categoría (ej: 'project-management')
  * @param {string} containerId - ID del div donde se pintarán los posts
@@ -50,6 +67,100 @@ export async function renderPostsByCategory(category, containerId) {
         let errorMsg = `<div class="col-span-full py-12 text-center text-red-500 font-medium">Error al cargar publicaciones.</div>`;
         container.innerHTML = errorMsg;
     }
+}
+
+/**
+ * Función para renderizar las últimas N publicaciones de cualquier categoría.
+ * @param {string} containerId - ID del div donde se pintarán los posts
+ * @param {number} limitNum - Límite de posts a mostrar
+ */
+export async function renderLatestPosts(containerId, limitNum = 5) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="col-span-full py-12 flex justify-center items-center gap-3 text-gray-400 font-medium animate-pulse">
+            <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            Sincronizando últimas historias...
+        </div>
+    `;
+
+    try {
+        const q = query(
+            collection(db, "posts"),
+            orderBy("fechaCreacion", "desc")
+        );
+
+        const querySnapshot = await getDocs(q);
+        const docs = querySnapshot.docs.slice(0, limitNum);
+
+        if (docs.length === 0) {
+            container.innerHTML = `<p class="col-span-full text-center py-12 text-gray-500">No hay publicaciones recientes.</p>`;
+            return;
+        }
+
+        container.innerHTML = '';
+        
+        docs.forEach(docSnap => {
+            const data = docSnap.data();
+            const postId = docSnap.id;
+            const card = createLatestPostCard(postId, data);
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Error cargando últimas publicaciones: ", error);
+        container.innerHTML = `<p class="col-span-full text-center py-12 text-red-500">Error al cargar las novedades.</p>`;
+    }
+}
+
+function createLatestPostCard(postId, data) {
+    const div = document.createElement('div');
+    div.className = 'group cursor-pointer';
+    
+    const categoryId = data.categorias && data.categorias.length > 0 ? data.categorias[0] : (data.categoria || 'general');
+    const category = categoryConfig[categoryId] || { name: categoryId, url: '#', color: '#1A73E8' };
+    const date = data.fechaCreacion ? data.fechaCreacion.toDate().toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) : 'Hoy';
+    const thumbnail = data.seoThumbnail || (data.imagenes && data.imagenes.length > 0 ? data.imagenes[0] : '/hojadevida/assets/icons/LogoPNG.png');
+
+    div.innerHTML = `
+        <div class="relative h-80 rounded-4xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 bg-gray-900">
+            <!-- Imagen de fondo optimizada -->
+            <div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" 
+                 style="background-image: url('${thumbnail}')">
+            </div>
+            
+            <!-- Overlay con degradado equilibrado -->
+            <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"></div>
+            
+            <!-- Tags superiores -->
+            <div class="absolute top-5 left-5 right-5 flex justify-between items-center z-10">
+                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider text-white backdrop-blur-md border border-white/20" style="background-color: ${category.color}80">
+                    ${category.name}
+                </span>
+                <span class="text-[10px] font-bold text-white/80 backdrop-blur-sm bg-black/20 px-3 py-1 rounded-full">
+                    ${date}
+                </span>
+            </div>
+            
+            <!-- Contenido inferior -->
+            <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                <h3 class="text-white font-bold text-lg leading-tight group-hover:text-blue-400 transition-colors line-clamp-2">
+                    ${data.titulo}
+                </h3>
+                <div class="mt-3 flex items-center gap-2 text-white/50 text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+                    Leer artículo 
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </div>
+        </div>
+    `;
+
+    div.addEventListener('click', () => {
+        window.location.href = `${category.url}#post-${postId}`;
+    });
+
+    return div;
 }
 
 export function createPostElement(postId, data, categoryPath) {
@@ -136,11 +247,11 @@ export function createPostElement(postId, data, categoryPath) {
             <!-- Information Column (Left) -->
             <div class="post-info-column flex flex-col h-full bg-white relative">
                 <!-- Padding interior para el contenido -->
-                <div class="p-8 lg:p-12 flex-grow flex flex-col">
+                <div class="p-8 lg:p-12 grow flex flex-col">
                     <h2 class="text-3xl lg:text-4xl font-black text-gray-900 mb-4 leading-tight tracking-tight">${data.titulo}</h2>
                     <span class="text-[10px] font-black text-[#FF7A00] uppercase tracking-[0.2em] mb-8 block">${dateStr}</span>
 
-                    <div class="post-content-container relative flex-grow" id="content-container-${postId}">
+                    <div class="post-content-container relative grow" id="content-container-${postId}">
                         <div class="prose max-w-none text-[#4A4A4A]">
                             ${cleanHtml}
                         </div>
@@ -188,16 +299,16 @@ export function createPostElement(postId, data, categoryPath) {
 
             <!-- Media Slider Column (Right) -->
             <div class="post-media-column group relative flex flex-col bg-[#111] min-h-[400px] lg:min-h-[600px] lg:h-full overflow-hidden" id="slider-${postId}">
-                <div class="main-media-display relative flex-grow w-full flex items-center justify-center bg-black overflow-hidden" id="media-viewport-${postId}">
+                <div class="main-media-display relative grow w-full flex items-center justify-center bg-black overflow-hidden" id="media-viewport-${postId}">
                     <!-- Main media content -->
                 </div>
                 
                 <!-- Nav Buttons (Inset) dark translucent style -->
-                <button class="absolute top-1/2 left-4 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md text-white border border-white/10 transition-all opacity-0 group-hover:opacity-100 shadow-md slider-nav-btn slider-nav-prev" id="prev-${postId}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+                <button class="absolute top-1/2 left-4 -translate-y-1/2 z-30 w-12 h-12 lg:w-10 lg:h-10 flex items-center justify-center rounded-full bg-black/50 lg:bg-black/40 lg:hover:bg-black/60 backdrop-blur-md text-white border border-white/10 transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 shadow-md slider-nav-btn slider-nav-prev" id="prev-${postId}">
+                    <svg class="w-6 h-6 lg:w-5 lg:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
                 </button>
-                <button class="absolute top-1/2 right-4 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md text-white border border-white/10 transition-all opacity-0 group-hover:opacity-100 shadow-md slider-nav-btn slider-nav-next" id="next-${postId}">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+                <button class="absolute top-1/2 right-4 -translate-y-1/2 z-30 w-12 h-12 lg:w-10 lg:h-10 flex items-center justify-center rounded-full bg-black/50 lg:bg-black/40 lg:hover:bg-black/60 backdrop-blur-md text-white border border-white/10 transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 shadow-md slider-nav-btn slider-nav-next" id="next-${postId}">
+                    <svg class="w-6 h-6 lg:w-5 lg:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
                 </button>
 
                 <!-- Thumbnails (Mockup Style: Flat blocks filling 100% width) -->
@@ -234,10 +345,10 @@ export function createPostElement(postId, data, categoryPath) {
                 </div>
 
                 <!-- Right: Inputs and Avatar -->
-                <div class="flex items-center gap-3 w-full lg:w-auto flex-grow flex-wrap lg:flex-nowrap">
+                <div class="flex items-center gap-3 w-full lg:w-auto grow flex-wrap lg:flex-nowrap">
                     <div class="w-9 h-9 rounded-full bg-[#E1F5FE] text-[#03A9F4] flex items-center justify-center font-bold text-sm shrink-0">Tu</div>
                     <input type="text" id="comment-name-${postId}" class="bg-white rounded-full px-4 py-2 border border-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 shadow-sm w-32 placeholder:text-gray-400" placeholder="Tu nombre">
-                    <input type="text" id="comment-text-${postId}" class="bg-white rounded-full px-5 py-2 border border-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 shadow-sm flex-grow placeholder:text-gray-400" placeholder="Escribe un comentario amable">
+                    <input type="text" id="comment-text-${postId}" class="bg-white rounded-full px-5 py-2 border border-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 shadow-sm grow placeholder:text-gray-400" placeholder="Escribe un comentario amable">
                     <button class="text-gray-500 hover:text-[#03A9F4] transition-colors p-2 shrink-0 submit-comment-btn" id="send-comment-${postId}">
                         <svg class="w-6 h-6 transform rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
                     </button>
