@@ -21,6 +21,18 @@ const categoryConfig = {
 };
 
 /**
+ * Estado local para manejo de filtros
+ */
+let currentCategoryPosts = [];
+let isInitialLoad = true;
+let activeFilters = {
+    search: '',
+    tools: new Set(),
+    client: 'all',
+    sortBy: 'newest'
+};
+
+/**
  * Función para renderizar posts de una categoría específica en un contenedor dado.
  * @param {string} category - ID de la categoría (ej: 'project-management')
  * @param {string} containerId - ID del div donde se pintarán los posts
@@ -28,6 +40,15 @@ const categoryConfig = {
 export async function renderPostsByCategory(category, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
+
+    // Insertar el contenedor de filtros antes del contenedor de posts si no existe
+    let filtersContainer = document.getElementById('blog-filters-container');
+    if (!filtersContainer) {
+        filtersContainer = document.createElement('div');
+        filtersContainer.id = 'blog-filters-container';
+        filtersContainer.className = 'blog-filters-container'; // ADDED CLASS
+        container.parentNode.insertBefore(filtersContainer, container);
+    }
 
     container.innerHTML = `<div class="col-span-full py-12 text-center text-gray-500 font-medium animate-pulse">Cargando publicaciones...</div>`;
 
@@ -39,8 +60,16 @@ export async function renderPostsByCategory(category, containerId) {
         );
 
         const querySnapshot = await getDocs(q);
+        currentCategoryPosts = [];
+        
+        querySnapshot.forEach(docSnap => {
+            currentCategoryPosts.push({
+                id: docSnap.id,
+                ...docSnap.data()
+            });
+        });
 
-        if (querySnapshot.empty) {
+        if (currentCategoryPosts.length === 0) {
             container.innerHTML = `
                 <div class="col-span-full py-16 text-center">
                     <div class="inline-flex w-16 h-16 bg-gray-100 rounded-full items-center justify-center mb-4">
@@ -50,23 +79,226 @@ export async function renderPostsByCategory(category, containerId) {
                     <p class="text-gray-500 mt-2">Mantente atento, pronto publicaremos contenido aquí.</p>
                 </div>
             `;
+            filtersContainer.innerHTML = ''; // No filters if no posts
             return;
         }
 
-        container.innerHTML = ''; // Clear loading
-
-        querySnapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            const postId = docSnap.id;
-            const postHTML = createPostElement(postId, data, category);
-            container.appendChild(postHTML);
-        });
+        renderBlogFilters(filtersContainer, container, category);
+        applyFilters(container, category);
+        isInitialLoad = false; // Post-initial load, disable auto-scrolling
 
     } catch (error) {
         console.error("Error cargando posts: ", error);
         let errorMsg = `<div class="col-span-full py-12 text-center text-red-500 font-medium">Error al cargar publicaciones.</div>`;
         container.innerHTML = errorMsg;
     }
+}
+
+function renderBlogFilters(filtersContainer, postsContainer, category) {
+    // Extraer herramientas y clientes únicos
+    const tools = new Set();
+    const clients = new Set();
+    
+    currentCategoryPosts.forEach(post => {
+        if (post.herramientas) post.herramientas.forEach(t => tools.add(t));
+        if (post.cliente && post.cliente.nombre && !post.cliente.anonimo) clients.add(post.cliente.nombre);
+    });
+
+    filtersContainer.innerHTML = `
+        <div class="blog-filters-bar">
+            <!-- Unified Row: Search + All Filters -->
+            <div class="filters-top-row">
+                <!-- Búsqueda -->
+                <div class="search-wrapper">
+                    <svg class="search-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" id="blog-search" class="search-input" placeholder="Buscar..." value="${activeFilters.search}">
+                </div>
+
+                <!-- Filtro de Fecha -->
+                <div class="filter-select-wrapper">
+                    <select id="filter-date" class="filter-select">
+                        <option value="newest" ${activeFilters.sortBy === 'newest' ? 'selected' : ''}>MÁS RECIENTE</option>
+                        <option value="oldest" ${activeFilters.sortBy === 'oldest' ? 'selected' : ''}>MÁS ANTIGUO</option>
+                    </select>
+                    <svg class="filter-chevron w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+
+                <!-- Filtro de Herramientas (Custom Multi-select Dropdown) -->
+                <div class="filter-select-wrapper relative" id="tools-dropdown-container">
+                    <div id="tools-dropdown-trigger" class="filter-select flex items-center justify-between">
+                        <span id="tools-selected-text">${activeFilters.tools.size > 0 ? `${activeFilters.tools.size} HERRAMIENTAS` : 'HERRAMIENTAS'}</span>
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div id="tools-dropdown-panel" class="tools-dropdown-panel hidden custom-scrollbar">
+                        ${Array.from(tools).sort().map(t => `
+                            <label class="tool-option flex items-center gap-3 px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors">
+                                <input type="checkbox" data-tool="${t}" ${activeFilters.tools.has(t) ? 'checked' : ''} class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                                <span class="text-xs font-bold text-gray-700 capitalize">${t}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Filtro de Cliente -->
+                <div class="filter-select-wrapper">
+                    <select id="filter-client" class="filter-select">
+                        <option value="all">TODOS LOS CLIENTES</option>
+                        ${Array.from(clients).sort().map(c => `<option value="${c}" ${activeFilters.client === c ? 'selected' : ''}>${c.toUpperCase()}</option>`).join('')}
+                        <option value="propio">PROYECTOS PROPIOS</option>
+                    </select>
+                    <svg class="filter-chevron w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+
+                <!-- Botón Favoritos (Emoji) -->
+                <button id="toggle-featured" class="featured-emoji-btn ${activeFilters.sortBy === 'most-voted' ? 'is-active' : ''}" title="Más Votados">
+                    <span class="text-lg">⭐</span>
+                </button>
+            </div>
+        </div>
+    `;
+
+    // Event Listeners
+    const searchInput = document.getElementById('blog-search');
+    searchInput.addEventListener('input', (e) => {
+        activeFilters.search = e.target.value.toLowerCase();
+        applyFilters(postsContainer, category);
+    });
+
+    document.getElementById('filter-date').addEventListener('change', (e) => {
+        activeFilters.sortBy = e.target.value;
+        applyFilters(postsContainer, category);
+    });
+
+    document.getElementById('filter-client').addEventListener('change', (e) => {
+        activeFilters.client = e.target.value;
+        applyFilters(postsContainer, category);
+    });
+
+    // Custom Tools Dropdown Logic
+    const toolsTrigger = document.getElementById('tools-dropdown-trigger');
+    const toolsPanel = document.getElementById('tools-dropdown-panel');
+    const toolsText = document.getElementById('tools-selected-text');
+
+    toolsTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toolsPanel.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!toolsPanel.contains(e.target) && !toolsTrigger.contains(e.target)) {
+            toolsPanel.classList.add('hidden');
+        }
+    });
+
+    toolsPanel.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const tool = checkbox.dataset.tool;
+            if (checkbox.checked) {
+                activeFilters.tools.add(tool);
+            } else {
+                activeFilters.tools.delete(tool);
+            }
+            
+            // Update UI text
+            if (activeFilters.tools.size > 0) {
+                toolsText.textContent = `${activeFilters.tools.size} HERRAMIENTAS`;
+            } else {
+                toolsText.textContent = 'HERRAMIENTAS';
+            }
+            
+            applyFilters(postsContainer, category);
+        });
+    });
+
+    document.getElementById('toggle-featured').addEventListener('click', (e) => {
+        const btn = e.currentTarget;
+        if (activeFilters.sortBy === 'most-voted') {
+            activeFilters.sortBy = 'newest';
+            btn.classList.remove('is-active');
+            document.getElementById('filter-date').value = 'newest';
+        } else {
+            activeFilters.sortBy = 'most-voted';
+            btn.classList.add('is-active');
+        }
+        applyFilters(postsContainer, category);
+    });
+}
+
+function applyFilters(container, category) {
+    let filtered = [...currentCategoryPosts];
+
+    // 1. Búsqueda por texto
+    if (activeFilters.search) {
+        filtered = filtered.filter(post => 
+            post.titulo.toLowerCase().includes(activeFilters.search) || 
+            (post.contenido && post.contenido.toLowerCase().includes(activeFilters.search))
+        );
+    }
+
+    // 2. Filtro de Cliente
+    if (activeFilters.client !== 'all') {
+        if (activeFilters.client === 'propio') {
+            filtered = filtered.filter(post => !post.cliente || post.cliente.anonimo || !post.cliente.nombre);
+        } else {
+            filtered = filtered.filter(post => post.cliente && post.cliente.nombre === activeFilters.client);
+        }
+    }
+
+    // 3. Filtro de Herramientas (Multi-select: AND logic)
+    if (activeFilters.tools.size > 0) {
+        filtered = filtered.filter(post => {
+            if (!post.herramientas) return false;
+            return Array.from(activeFilters.tools).every(tool => post.herramientas.includes(tool));
+        });
+    }
+
+    // 4. Ordenamiento
+    if (activeFilters.sortBy === 'most-voted') {
+        filtered.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+    } else if (activeFilters.sortBy === 'oldest') {
+        filtered.sort((a, b) => a.fechaCreacion.toDate() - b.fechaCreacion.toDate());
+    } else {
+        filtered.sort((a, b) => b.fechaCreacion.toDate() - a.fechaCreacion.toDate());
+    }
+
+    // Capturar estado para evitar saltos
+    const scrollPos = window.scrollY;
+    const currentHeight = container.scrollHeight;
+    container.style.minHeight = `${currentHeight}px`;
+    
+    container.innerHTML = '';
+    if (filtered.length === 0) {
+        container.innerHTML = `
+            <div class="col-span-full py-24 text-center">
+                <div class="inline-flex w-20 h-20 bg-gray-50 rounded-3xl items-center justify-center mb-6 text-gray-300">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+                <h3 class="text-2xl font-black text-gray-800 mb-2 tracking-tight">Sin coincidencias</h3>
+                <p class="text-gray-500 mb-8 max-w-md mx-auto font-medium">No hay publicaciones que coincidan con los filtros seleccionados. Intenta ajustar tu búsqueda.</p>
+                <button class="px-8 py-4 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-blue-700 transition-all shadow-2xl shadow-blue-600/30 hover:-translate-y-1 active:scale-95" id="clear-filters">
+                    Limpiar Filtros
+                </button>
+            </div>
+        `;
+        document.getElementById('clear-filters').addEventListener('click', () => {
+            activeFilters = { search: '', tools: new Set(), client: 'all', sortBy: 'newest' };
+            const filtersContainer = document.getElementById('blog-filters-container');
+            renderBlogFilters(filtersContainer, container, category);
+            applyFilters(container, category);
+        });
+        container.style.minHeight = '';
+        window.scrollTo({ top: scrollPos, behavior: 'instant' });
+        return;
+    }
+
+    filtered.forEach(post => {
+        const postHTML = createPostElement(post.id, post, category);
+        container.appendChild(postHTML);
+    });
+
+    // Restaurar altura natural y posición
+    container.style.minHeight = '';
+    window.scrollTo({ top: scrollPos, behavior: 'instant' });
 }
 
 /**
@@ -465,7 +697,7 @@ function initializePostInteractions(article, postId, data, categoryPath) {
     });
 
     // Share logic & Client-Side SEO Injection on direct link Match
-    if (window.location.hash === `#post-${postId}`) {
+    if (isInitialLoad && window.location.hash === `#post-${postId}`) {
         const fullTitle = `${data.titulo} – Portafolio Web de Jeefry Archila`;
         document.title = fullTitle;
 
@@ -492,7 +724,7 @@ function initializePostInteractions(article, postId, data, categoryPath) {
         setMeta('name', 'twitter:description', fullTitle);
         setMeta('name', 'twitter:image', finalSeoImage);
 
-        // Scroll al post automáticamente
+        // Scroll al post automáticamente solo la primera vez
         setTimeout(() => {
             const el = document.getElementById(`post-${postId}`);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });

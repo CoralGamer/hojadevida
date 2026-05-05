@@ -38,14 +38,17 @@ let youtubeInputsCount = 0;
 // ==========================================
 // 1. AUTHENTICATION & SECURITY
 // ==========================================
+const ADMIN_UID = "RCOUAepI2xRAyCP17zSNu9BswGH2";
+
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // Logged in
+    if (user && user.uid === ADMIN_UID) {
+        // Logged in as authorized admin
         adminEmailDisplay.textContent = user.email;
         adminBody.classList.remove('hidden');
         loadPosts(); // Load posts for moderation tab
     } else {
-        // Not logged in, kick out
+        // Not logged in or not authorized, kick out
+        if (user) signOut(auth); // Sign out unauthorized users
         window.location.href = 'admin-login.html';
     }
 });
