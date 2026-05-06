@@ -248,6 +248,12 @@ body {
 /* Post Redesign Styles */
 .post-card {
   @apply bg-white rounded-[2.5rem] overflow-hidden shadow-sm border border-gray-100 mb-12 transition-all duration-500 hover:shadow-xl;
+  overflow-anchor: none;
+}
+
+/* Container-level safety */
+#postsContainer, #latestPostsContainer {
+  overflow-anchor: none;
 }
 
 .post-layout {

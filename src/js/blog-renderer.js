@@ -227,15 +227,13 @@ function renderBlogFilters(filtersContainer, postsContainer, category) {
 function applyFilters(container, category) {
     let filtered = [...currentCategoryPosts];
 
-    // 1. Búsqueda por texto
+    // 1. Filtrado lógico
     if (activeFilters.search) {
         filtered = filtered.filter(post => 
             post.titulo.toLowerCase().includes(activeFilters.search) || 
             (post.contenido && post.contenido.toLowerCase().includes(activeFilters.search))
         );
     }
-
-    // 2. Filtro de Cliente
     if (activeFilters.client !== 'all') {
         if (activeFilters.client === 'propio') {
             filtered = filtered.filter(post => !post.cliente || post.cliente.anonimo || !post.cliente.nombre);
@@ -243,16 +241,12 @@ function applyFilters(container, category) {
             filtered = filtered.filter(post => post.cliente && post.cliente.nombre === activeFilters.client);
         }
     }
-
-    // 3. Filtro de Herramientas (Multi-select: AND logic)
     if (activeFilters.tools.size > 0) {
         filtered = filtered.filter(post => {
             if (!post.herramientas) return false;
             return Array.from(activeFilters.tools).every(tool => post.herramientas.includes(tool));
         });
     }
-
-    // 4. Ordenamiento
     if (activeFilters.sortBy === 'most-voted') {
         filtered.sort((a, b) => (b.likes || 0) - (a.likes || 0));
     } else if (activeFilters.sortBy === 'oldest') {
@@ -261,44 +255,87 @@ function applyFilters(container, category) {
         filtered.sort((a, b) => b.fechaCreacion.toDate() - a.fechaCreacion.toDate());
     }
 
-    // Capturar estado para evitar saltos
+    // A. Capturar estado actual
     const scrollPos = window.scrollY;
-    const currentHeight = container.scrollHeight;
-    container.style.minHeight = `${currentHeight}px`;
+    const initialBodyHeight = document.documentElement.scrollHeight;
     
-    container.innerHTML = '';
+    // B. Limpiar mensaje de carga inicial si existe
+    const loadingMsg = container.querySelector('.animate-pulse');
+    if (loadingMsg) {
+        container.innerHTML = '';
+    }
+
+    // C. Bloquear altura total
+    document.body.style.minHeight = `${initialBodyHeight}px`;
+    
+    // Asegurar que el contenedor use Flexbox para poder reordenar con 'order'
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '3rem'; // Equivalente a space-y-12 (3rem = 48px)
+    
+    // Crear mapa de IDs de los que deben ser visibles
+    const filteredIds = new Set(filtered.map(p => p.id));
+    
+    // Actualizar visibilidad y orden sin destruir elementos
+    currentCategoryPosts.forEach(post => {
+        let postEl = document.getElementById(`post-${post.id}`);
+        
+        // Si no existe (raro si ya cargaron), lo creamos e insertamos
+        if (!postEl) {
+            postEl = createPostElement(post.id, post, category);
+            container.appendChild(postEl);
+        }
+
+        if (filteredIds.has(post.id)) {
+            postEl.style.display = 'block';
+            // Asignar el orden basado en el array 'filtered'
+            const orderIndex = filtered.findIndex(p => p.id === post.id);
+            postEl.style.order = orderIndex;
+        } else {
+            postEl.style.display = 'none';
+        }
+    });
+
+    // Manejar el caso de "Sin coincidencias"
+    let emptyMsg = document.getElementById('blog-empty-message');
     if (filtered.length === 0) {
-        container.innerHTML = `
-            <div class="col-span-full py-24 text-center">
+        if (!emptyMsg) {
+            emptyMsg = document.createElement('div');
+            emptyMsg.id = 'blog-empty-message';
+            emptyMsg.className = 'col-span-full py-24 text-center';
+            emptyMsg.innerHTML = `
                 <div class="inline-flex w-20 h-20 bg-gray-50 rounded-3xl items-center justify-center mb-6 text-gray-300">
                     <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </div>
                 <h3 class="text-2xl font-black text-gray-800 mb-2 tracking-tight">Sin coincidencias</h3>
-                <p class="text-gray-500 mb-8 max-w-md mx-auto font-medium">No hay publicaciones que coincidan con los filtros seleccionados. Intenta ajustar tu búsqueda.</p>
-                <button class="px-8 py-4 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-blue-700 transition-all shadow-2xl shadow-blue-600/30 hover:-translate-y-1 active:scale-95" id="clear-filters">
-                    Limpiar Filtros
-                </button>
-            </div>
-        `;
-        document.getElementById('clear-filters').addEventListener('click', () => {
-            activeFilters = { search: '', tools: new Set(), client: 'all', sortBy: 'newest' };
-            const filtersContainer = document.getElementById('blog-filters-container');
-            renderBlogFilters(filtersContainer, container, category);
-            applyFilters(container, category);
-        });
-        container.style.minHeight = '';
-        window.scrollTo({ top: scrollPos, behavior: 'instant' });
-        return;
+                <p class="text-gray-500 mb-8 max-w-md mx-auto font-medium">No hay publicaciones que coincidan con los filtros seleccionados.</p>
+                <button class="px-8 py-4 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px]" id="clear-filters-btn">Limpiar Filtros</button>
+            `;
+            container.appendChild(emptyMsg);
+            document.getElementById('clear-filters-btn').addEventListener('click', () => {
+                activeFilters = { search: '', tools: new Set(), client: 'all', sortBy: 'newest' };
+                const filtersContainer = document.getElementById('blog-filters-container');
+                renderBlogFilters(filtersContainer, container, category);
+                applyFilters(container, category);
+            });
+        }
+        emptyMsg.style.display = 'block';
+        emptyMsg.style.order = 0;
+    } else if (emptyMsg) {
+        emptyMsg.style.display = 'none';
     }
 
-    filtered.forEach(post => {
-        const postHTML = createPostElement(post.id, post, category);
-        container.appendChild(postHTML);
-    });
+    // Restaurar scroll de inmediato
+    window.scrollTo(0, scrollPos);
 
-    // Restaurar altura natural y posición
-    container.style.minHeight = '';
-    window.scrollTo({ top: scrollPos, behavior: 'instant' });
+    // Ciclo de estabilización
+    requestAnimationFrame(() => {
+        window.scrollTo(0, scrollPos);
+        setTimeout(() => {
+            document.body.style.minHeight = '';
+            window.scrollTo(0, scrollPos);
+        }, 100);
+    });
 }
 
 /**
